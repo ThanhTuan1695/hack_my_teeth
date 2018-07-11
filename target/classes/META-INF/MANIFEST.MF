@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: HackMyTeeth
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: anh-mac
+Implementation-Vendor-Id: com.mgmsec.HackMyTeeth
+Build-Jdk: 1.8.0_171
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/HackMyTeeth
+Created-By: Maven Integration for Eclipse
+
