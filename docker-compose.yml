@@ -1,0 +1,25 @@
+version: '3.2'
+
+services:
+
+  db:
+    image: maria
+    restart: always
+    environment:
+      MYSQL_USER: root
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+      MYSQL_DATABASE: dentist
+      MYSQL_ROOT_HOST: '%'
+    ports:
+      - 6000:3306
+    build: 
+      context: .
+      dockerfile: Dockerfile.db
+
+  app:
+    image: fix
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+
