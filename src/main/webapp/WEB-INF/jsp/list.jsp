@@ -15,9 +15,9 @@
 	</tr>
 	<c:forEach items="${userList}" var="cus">
 		<tr>
-			<td><c:out value="{$cus.cusID}"></c:out></td>
-			<td><c:out value="{$cus.firstName}"></c:out></td>
-			<td><c:out value="{$cus.lastName}"></c:out></td>
+			<td><c:out value="${cus.getcusID()}"></c:out></td>
+			<td><c:out value="${cus.getFirstName()}"></c:out></td>
+			<td><c:out value="${cus.getLastName()}"></c:out></td>
 			
 		</tr>
 	</c:forEach>

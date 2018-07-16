@@ -12,6 +12,7 @@ public class CustomerRepository {
 	public List<Customer> displayAll(){
 		try {
 			List<Customer> result = jdbcTemplate.query("SELECT * from Customer",(rs,rowNum) -> new Customer(rs.getLong("cusID"),rs.getString("firstName"),rs.getString("lastName"),rs.getString("email"),rs.getString("phone"),rs.getString("gender"),rs.getLong("accountID")));
+			System.out.println(result.toString());
 			return result;
 		}catch (Exception e) {
 			e.getStackTrace();

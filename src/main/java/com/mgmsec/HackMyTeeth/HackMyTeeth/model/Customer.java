@@ -14,24 +14,29 @@ import javax.persistence.ManyToOne;
 @Table(name="customer")
 public class Customer {
 	@Id
-	private long id;
+	private long cusID;
 	@Column(name="firstName")
 	private String firstName;
 	@Column(name="lastName")
 	private String lastName;
 	@Column(name="email")
 	private String email;
+	@Override
+	public String toString() {
+		return "Customer [cusID=" + cusID + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
+				+ ", phone=" + phone + ", gender=" + gender + ", accountID=" + accountID + "]";
+	}
 	@Column(name="phone")
 	private String phone;
 	@Column(name="gender")
 	private String gender;
 	@Column(name="accountID")
 	private long accountID;
-	public long getId() {
-		return id;
+	public long getcusID() {
+		return cusID;
 	}
-	public void setId(long id) {
-		this.id = id;
+	public void setcusID(long cusID) {
+		this.cusID = cusID;
 	}
 	public String getFirstName() {
 		return firstName;
@@ -69,10 +74,10 @@ public class Customer {
 	public void setAccountID(long accountID) {
 		this.accountID = accountID;
 	}
-	public Customer(long id, String firstName, String lastName, String email, String phone, String gender,
+	public Customer(long cusID, String firstName, String lastName, String email, String phone, String gender,
 			long accountID) {
 		super();
-		this.id = id;
+		this.cusID=cusID;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
