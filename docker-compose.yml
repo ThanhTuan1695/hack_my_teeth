@@ -14,7 +14,8 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile.db
-
+    volumes:
+      - ./mysql_dump:/docker-entrypoint-initdb.d
   app:
     image: whitenguyen2512/hack_my_teeth:latest
     ports:
