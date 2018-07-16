@@ -14,7 +14,8 @@ RUN mvn verify clean --fail-never
 
 ADD . /root/hack_my_teeth
 
-RUN mvn install
+#RUN mvn install 
+CMD ["mvn", "install", "-Dmaven.test.skip=true"]
 
 
 
