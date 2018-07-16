@@ -2,23 +2,32 @@ package com.mgmsec.HackMyTeeth.HackMyTeeth.controllers;
 
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.ui.Model;
 
+import com.mgmsec.HackMyTeeth.HackMyTeeth.model.Customer;
 import com.mgmsec.HackMyTeeth.HackMyTeeth.service.CustomerService;
 
 @Controller
 public class TestController {
-	private CustomerService customerService;
+	@Autowired
+	CustomerService customerService;
 	@RequestMapping("/welcome")
 	public ModelAndView firstPage() {
 		return new ModelAndView("welcome");
 	}
-	@RequestMapping(value = "/displayCustomer", method = RequestMethod.GET)
-	public String list(Map<String, Object> map) {
-		map.put("userList",customerService.findAll());
+	@RequestMapping("/list")
+	public String list(Model model) {
+		model.addAttribute("userList",customerService.findAll());
+		System.out.println(customerService.findAll().toString());
+		for (Customer cust : customerService.findAll()) {
+		    System.out.println(cust.toString());
+		}
+
 		return "list";
 	}
 
