@@ -23,7 +23,7 @@ CMD /usr/local/bin/wait.sh
 
 
 
-#FROM java:8
+FROM java:8
 CMD ["ls", "/root/hack_my_teeth/target/"]
 CMD ["cp","/root/hack_my_teeth/target/HackMyTeeth-0.0.1-SNAPSHOT.jar","/tmp/app.jar"]
 RUN java -jar -Dspring.profiles.active=docker /root/hack_my_teeth/target/HackMyTeeth-0.0.1-SNAPSHOT.jar
