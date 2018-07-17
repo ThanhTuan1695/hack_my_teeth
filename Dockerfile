@@ -25,4 +25,4 @@ CMD ["mvn", "install", "-Dmaven.test.skip=true"]
 
 RUN bash -c "cp /root/hack_my_teeth/target/*.jar /opt/app.jar"
 
-#CMD ["java","-jar","/opt/app.jar"]
+CMD ["java","-jar","/opt/app.jar"]
