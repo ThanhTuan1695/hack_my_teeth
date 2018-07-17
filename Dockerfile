@@ -1,7 +1,5 @@
 FROM library/mysql
 COPY wait_for_db.sh /usr/local/bin/wait.sh
-CMD /usr/local/bin/wait.sh
-
 
 FROM maven:3.5.3-jdk-8 as maven
 
@@ -25,6 +23,6 @@ RUN mvn -Dmaven.test.skip=true install
 
 CMD ["ls", "/root/hack_my_teeth/target/"]
 CMD ["cp","/root/hack_my_teeth/target/HackMyTeeth-0.0.1-SNAPSHOT.jar","/tmp/app.jar"]
-RUN java -jar -Dspring.profiles.active=docker /root/hack_my_teeth/target/HackMyTeeth-0.0.1-SNAPSHOT.jar
+#RUN java -jar -Dspring.profiles.active=docker /root/hack_my_teeth/target/HackMyTeeth-0.0.1-SNAPSHOT.jar
 #CMD ["java","-jar","-Dspring.profiles.active=docker","/tmp/app.jar"]
 #CMD ["sleep", "1d"]
