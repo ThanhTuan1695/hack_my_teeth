@@ -17,7 +17,9 @@ ADD . /root/hack_my_teeth
 RUN mvn -Dmaven.test.skip=true install 
 #CMD ["mvn", "install", "-Dmaven.test.skip=true"]
 
-
+FROM library/mysql
+COPY wait_for_db.sh /usr/local/bin/wait.sh
+CMD /usr/local/bin/wait.sh
 
 
 
