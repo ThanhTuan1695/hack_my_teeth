@@ -1,3 +1,8 @@
+FROM library/mysql
+COPY wait_for_db.sh /usr/local/bin/wait.sh
+CMD /usr/local/bin/wait.sh
+
+
 FROM maven:3.5.3-jdk-8 as maven
 
 RUN mkdir --parents /root/hack_my_teeth
@@ -17,13 +22,7 @@ ADD . /root/hack_my_teeth
 RUN mvn -Dmaven.test.skip=true install 
 #CMD ["mvn", "install", "-Dmaven.test.skip=true"]
 
-FROM library/mysql
-COPY wait_for_db.sh /usr/local/bin/wait.sh
-CMD /usr/local/bin/wait.sh
 
-
-
-FROM java:8
 CMD ["ls", "/root/hack_my_teeth/target/"]
 CMD ["cp","/root/hack_my_teeth/target/HackMyTeeth-0.0.1-SNAPSHOT.jar","/tmp/app.jar"]
 RUN java -jar -Dspring.profiles.active=docker /root/hack_my_teeth/target/HackMyTeeth-0.0.1-SNAPSHOT.jar
