@@ -23,7 +23,7 @@ RUN mvn -Dmaven.test.skip=true install
 
 FROM java:8
 CMD ["ls", "/root/hack_my_teeth/target/"]
-CMD ["cp","/root/hack_my_teeth/target/HackMyTeeth-0.0.1-SNAPSHOT.jar","/root/app.jar"]
+CMD ["cp","/root/hack_my_teeth/target/HackMyTeeth-0.0.1-SNAPSHOT.jar","/tmp/app.jar"]
 
-CMD ["java","-jar","-Dspring.profiles.active=docker","/root/app.jar"]
+CMD ["java","-jar","-Dspring.profiles.active=docker","/tmp/app.jar"]
 #CMD ["sleep", "1d"]
