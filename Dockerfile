@@ -23,7 +23,7 @@ CMD ["mvn", "install", "-Dmaven.test.skip=true"]
 
 #FROM java:8
 
-RUN bash -c "cp /root/hack_my_teeth/target/*.jar /opt/app.jar"
+RUN bash -c "cp /root/hack_my_teeth/target/Hack*.jar /root/app.jar"
 
-#CMD ["java","-jar","/opt/app.jar"]
+#CMD ["java","-jar","-Dspring.profiles.active=docker","/root/app.jar"]
 CMD ["sleep", "1d"]
