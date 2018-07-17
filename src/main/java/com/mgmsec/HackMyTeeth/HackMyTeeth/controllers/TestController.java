@@ -23,7 +23,7 @@ public class TestController {
 	@RequestMapping("/list")
 	public String list(Model model) {
 		model.addAttribute("userList",customerService.findAll());
-		System.out.println(customerService.findAll().toString());
+		
 		for (Customer cust : customerService.findAll()) {
 		    System.out.println(cust.toString());
 		}
