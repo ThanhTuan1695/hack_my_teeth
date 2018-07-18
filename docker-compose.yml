@@ -3,7 +3,7 @@ version: '3.2'
 services:
 
   db:
-    image: maria
+    container_name: hackteeth_db
     restart: always
     environment:
       MYSQL_USER: root
@@ -11,15 +11,17 @@ services:
       MYSQL_DATABASE: dentist
       MYSQL_ROOT_HOST: '%'
     ports:
-      - 6000:3306
+      - 3306:3306
     build: 
       context: .
       dockerfile: Dockerfile.db
-
+    volumes:
+      - ./mysql_dump:/docker-entrypoint-initdb.d
   app:
-    image: fix
+    image: whitenguyen2512/hack_my_teeth:latest
     ports:
       - 8080:8080
     depends_on:
       - db
-
+    restart: always
+    command: bash -c "echo 'ok' && java -jar -Dspring.profiles.active=docker /root/hack_my_teeth/target/HackMyTeeth-0.0.1-SNAPSHOT.jar"
