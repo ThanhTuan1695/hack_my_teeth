@@ -4,7 +4,7 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <t:layout>
     <div class="container">
-
+	
         <h1 class="my-4">Welcome to Dentist Booking</h1>
 
         <!-- Marketing Icons Section -->

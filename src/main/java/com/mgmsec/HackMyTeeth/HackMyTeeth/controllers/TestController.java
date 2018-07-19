@@ -34,5 +34,8 @@ public class TestController {
 	public ModelAndView homePage(){
 		return new ModelAndView("home");
 	}
-
+	@RequestMapping("/login")
+	public ModelAndView loginPage(){
+		return new ModelAndView("login");
+	}
 }
