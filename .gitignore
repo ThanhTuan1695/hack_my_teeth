@@ -1,2 +1,4 @@
 /target/
 /.settings/
+/target/classes/application.properties
+/.idea
