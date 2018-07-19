@@ -30,5 +30,12 @@ public class TestController {
 
 		return "list";
 	}
-
+	@RequestMapping("/home")
+	public ModelAndView homePage(){
+		return new ModelAndView("home");
+	}
+	@RequestMapping("/login")
+	public ModelAndView loginPage(){
+		return new ModelAndView("login");
+	}
 }
