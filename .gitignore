@@ -1,9 +1,4 @@
 /target/
 /.settings/
-<<<<<<< HEAD
-/src/main/resources/application.properties
 /target/classes/application.properties
-=======
-resources/*
 /.idea
->>>>>>> 0dd7d779c1cb80b61f1f70438c34f60dac2b95e7
