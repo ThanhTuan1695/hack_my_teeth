@@ -23,6 +23,10 @@ public class LoginController {
 		return new ModelAndView("login");
 	}
 	
+	@RequestMapping("/home")
+	public ModelAndView home() {
+		return new ModelAndView("home");
+	}
 	@RequestMapping("/welcome")
 	public ModelAndView welcome() {
 		return new ModelAndView("welcome");
