@@ -3,4 +3,4 @@
 /target/classes/application.properties
 /.idea
 /docker-compose.yml
-/src/main/resources/application.properties
+/src/main/resources/*
