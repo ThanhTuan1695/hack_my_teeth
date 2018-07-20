@@ -1,5 +1,7 @@
 package com.mgmsec.HackMyTeeth.HackMyTeeth.controllers;
 
+import java.time.Clock;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +27,15 @@ public class LoginController {
 	
 	@RequestMapping("/home")
 	public ModelAndView home() {
-		return new ModelAndView("home");
+		ModelAndView modelAndView = new ModelAndView();
+		List<User> listDentist = userService.listDentist();
+		System.out.println(listDentist);
+		for (User e: listDentist) {
+			System.out.println(e.toString());
+		}
+		modelAndView.addObject("listDentist",listDentist);
+		modelAndView.setViewName("home");
+		return modelAndView;
 	}
 	@RequestMapping("/welcome")
 	public ModelAndView welcome() {
@@ -33,7 +43,7 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value = "/loginVal", method = RequestMethod.POST)
-	public ModelAndView login(Model model, HttpServletRequest request) {
+	public ModelAndView login(HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
 		User user = new User();
 		user.setUsername(request.getParameter("username"));
