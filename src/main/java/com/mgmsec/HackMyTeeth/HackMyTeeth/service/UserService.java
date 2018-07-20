@@ -5,5 +5,6 @@ public interface UserService {
 	List<User> findAll();	
 	List<User> findByUsername(String username);	
 	boolean validateUser(String username,String password);
+	List<User> listDentist();
 	
 }

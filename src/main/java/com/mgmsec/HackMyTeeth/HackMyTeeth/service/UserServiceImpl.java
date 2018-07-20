@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserServiceImpl  implements UserService{
+public class UserServiceImpl implements UserService{
 
 	@Autowired
 	private UserRepository userRepository;
@@ -31,6 +31,9 @@ public class UserServiceImpl  implements UserService{
 			return false;
 		} 
 		return password.equals(users.get(0).getPassword());
+	}
+	public List<User> listDentist (){
+		return userRepository.listDentist();
 	}
 	
 }
