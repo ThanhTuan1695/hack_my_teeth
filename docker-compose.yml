@@ -3,20 +3,31 @@ version: '3.2'
 services:
 
   db:
+<<<<<<< HEAD
+=======
     container_name: hackteeth_db
     restart: always
+>>>>>>> 797c7382858cd55fa687fa85d4c027fe89b8fd24
     environment:
       MYSQL_USER: root
       MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
       MYSQL_DATABASE: dentist
       MYSQL_ROOT_HOST: '%'
+    restart: always
     ports:
       - 3306:3306
+<<<<<<< HEAD
+  build: 
+    context: .
+    dockerfile: Dockerfile.db
+
+=======
     build: 
       context: .
       dockerfile: Dockerfile.db
     volumes:
       - ./mysql_dump:/docker-entrypoint-initdb.d
+>>>>>>> 797c7382858cd55fa687fa85d4c027fe89b8fd24
   app:
     image: whitenguyen2512/hack_my_teeth:latest
     ports:
@@ -24,4 +35,7 @@ services:
     depends_on:
       - db
     restart: always
+<<<<<<< HEAD
+=======
     command: bash -c "echo 'ok' && java -jar -Dspring.profiles.active=docker /root/hack_my_teeth/target/HackMyTeeth-0.0.1-SNAPSHOT.jar"
+>>>>>>> 797c7382858cd55fa687fa85d4c027fe89b8fd24
