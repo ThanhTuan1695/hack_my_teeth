@@ -11,7 +11,7 @@ public class UserRepository {
 	private JdbcTemplate jdbcTemplate;
 	public List<User> findAll(){
 		try {
-			List<User> result = jdbcTemplate.query("SELECT userID,firstName,lastName,email from user",(rs,rowNum) -> new User(rs.getLong("userID"),rs.getString("username"),rs.getString("password"),rs.getString("firstName"),rs.getString("lastName"),rs.getString("email")));
+			List<User> result = jdbcTemplate.query("SELECT userID,firstName,lastName,email from user",(rs,rowNum) -> new User(rs.getLong("userID"),rs.getString("firstName"),rs.getString("lastName"),rs.getString("email"),rs.getString("username"),rs.getString("password")));
 
 			return result;
 		}catch (Exception e) {
@@ -23,11 +23,11 @@ public class UserRepository {
 	
 	public List<User> findByUsername(String username) {
 		try {
-			List<User> result = jdbcTemplate.query( "SELECT * FROM Users WHERE username=?", 
-					   (rs, rowNum) -> new User(rs.getLong("userID"),rs.getString("username"),rs.getString("password"),rs.getString("firstName"),rs.getString("lastName"),rs.getString("email")),
+			List<User> result = jdbcTemplate.query( "SELECT * FROM user WHERE username=?", 
+					   (rs, rowNum) -> new User(rs.getLong("userID"),rs.getString("firstName"),rs.getString("lastName"),rs.getString("email"),rs.getString("username"),rs.getString("password")),
 					   				   username
 					 );
-
+		System.out.println(result);
 			return result;
 		} catch(Exception e) {
 			e.printStackTrace();

@@ -18,13 +18,17 @@ import com.mgmsec.HackMyTeeth.HackMyTeeth.service.UserService;
 public class LoginController {
 	@Autowired
 	UserService userService;
-	@RequestMapping("/welcome")
+	@RequestMapping("/login")
 	public ModelAndView firstPage() {
+		return new ModelAndView("login");
+	}
+	
+	@RequestMapping("/welcome")
+	public ModelAndView welcome() {
 		return new ModelAndView("welcome");
 	}
 	
-	
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@RequestMapping(value = "/loginVal", method = RequestMethod.POST)
 	public ModelAndView login(Model model, HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
 		User user = new User();
@@ -32,24 +36,16 @@ public class LoginController {
 		user.setPassword(request.getParameter("password"));
 		String name = user.getUsername();
 		String pass =user.getPassword();
-		if(name == null || name.isEmpty()) {
-			modelAndView.addObject("errorMessage", "Please enter username");
-			modelAndView.setViewName("login");
-			return modelAndView;
-		}
-		
-		if(pass == null || pass.isEmpty()) {
-			modelAndView.addObject("errorMessage", "Please enter password");
-			modelAndView.setViewName("login");
-			return modelAndView;
-		}
+		modelAndView.setViewName("login");
 		
 		boolean isValidUser = userService.validateUser(name, pass);
 		if (!isValidUser) {
 			modelAndView.addObject("errorMessage", "Invalid username or password");
+			modelAndView.setViewName("login");
+			return modelAndView;
+		} else if (isValidUser) {
 			return new ModelAndView("redirect:/welcome");
 		}
 		return modelAndView;
 	}
-
 }
