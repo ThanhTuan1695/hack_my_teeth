@@ -52,13 +52,18 @@ public class LoginController {
 		String pass =user.getPassword();
 		modelAndView.setViewName("login");
 		
-		boolean isValidUser = userService.validateUser(name, pass);
-		if (!isValidUser) {
+		String reUser = userService.findByUsername(name, pass);
+		String s1 = "customer";
+		String s2 = "dentist";
+		String s3 = "invalid";
+		if (reUser.equals(s3)) {
 			modelAndView.addObject("errorMessage", "Invalid username or password");
 			modelAndView.setViewName("login");
 			return modelAndView;
-		} else if (isValidUser) {
+		} else if (reUser.equals(s1)) {
 			return new ModelAndView("redirect:/welcome");
+		} else if (reUser.equals(s2)) {
+			
 		}
 		return modelAndView;
 	}
