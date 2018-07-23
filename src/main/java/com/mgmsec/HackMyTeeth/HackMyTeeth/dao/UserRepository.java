@@ -23,9 +23,9 @@ public class UserRepository {
 	
 	public List<User> findByUsername(String username) {
 		try {
-			List<User> result = jdbcTemplate.query( "SELECT * FROM user WHERE username=?", 
-					   (rs, rowNum) -> new User(rs.getLong("userID"),rs.getString("firstName"),rs.getString("lastName"),rs.getString("email"),rs.getString("username"),rs.getString("password")),
-					   				   username
+			List<User> result = jdbcTemplate.query( "SELECT * FROM user WHERE username=" + username, 
+					   (rs, rowNum) -> new User(rs.getLong("userID"),rs.getString("firstName"),rs.getString("lastName"),rs.getString("email"),rs.getString("username"),rs.getString("password"))
+					   				   
 					 );
 		System.out.println(result);
 			return result;
