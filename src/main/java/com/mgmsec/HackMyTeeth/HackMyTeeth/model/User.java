@@ -35,7 +35,7 @@ public class User {
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(long userID, String firstName, String lastName, String email, String username, String password) {
+	public User(long userID, String firstName, String lastName, String email, String username, String password, String role) {
 		super();
 		this.userID=userID;
 		this.firstName = firstName;
@@ -43,6 +43,7 @@ public class User {
 		this.email = email;
 		this.username = username;
 		this.password = password;
+		this.role = role;
 	}
 	
 	public long getuserID() {
@@ -88,7 +89,7 @@ public class User {
 	
 	@Override
 	public String toString() {
-		return "User [userID=" + userID + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + "]";
+		return "User [userID=" + userID + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", username=" + username +", password=" + password +", role=" + role +"]";
 	}
 	
 	

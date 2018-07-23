@@ -20,17 +20,9 @@ public class UserServiceImpl  implements UserService{
 	}
 	
 	@Override
-	public List<User> findByUsername(String username) {
-		return userRepository.findByUsername(username);
+	public String findByUsername(String username,String password) {
+		return userRepository.findByUsername(username,password);
 	}
 	
-	public boolean validateUser(String username, String password) {
-		List<User> users = (List<User>) findByUsername(username);
-		System.out.println(password +"-"+users.get(0).getPassword());
-		if(users == null || users.isEmpty()) {
-			return false;
-		} 
-		return password.equals(users.get(0).getPassword());
-	}
-	
+		
 }
