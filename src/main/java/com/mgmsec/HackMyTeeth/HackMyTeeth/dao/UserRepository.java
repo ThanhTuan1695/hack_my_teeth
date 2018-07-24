@@ -62,28 +62,37 @@ public class UserRepository {
 
     }
 
-    public User getDentistById(String id, Boolean sqli){
+    public User getDentistById(String id, Boolean sqli) {
         List<User> result;
-        if (sqli){
-            int param ;
+        if (sqli) {
+            int param;
             try {
                 param = Integer.valueOf(id);
-            } catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
                 param = 0;
             }
             String asql = "select * from user where userID = ? and role = 1";
-            result = jdbcTemplate.query(asql, (rs, rowNum)-> new User(rs.getLong("userID"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("email"), rs.getString("username"), rs.getString("password"), rs.getString("role")), param);
+            result = jdbcTemplate.query(asql, (rs, rowNum) -> new User(rs.getLong("userID"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("email"), rs.getString("username"), rs.getString("password"), rs.getString("role")), param);
 
         } else {
             String sql = "select * from user where userID =" + id + " and role = 1";
-            result = jdbcTemplate.query(sql, (rs, rowNum)-> new User(rs.getLong("userID"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("email"), rs.getString("username"), rs.getString("password"), rs.getString("role")));
+            result = jdbcTemplate.query(sql, (rs, rowNum) -> new User(rs.getLong("userID"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("email"), rs.getString("username"), rs.getString("password"), rs.getString("role")));
         }
         if (result.size() <= 0)
             return null;
         return result.get(0);
-
     }
-
+    public List<User> findByUser(String username,String password){
+    	try {
+	    	List<User> result = jdbcTemplate.query( "SELECT * FROM user WHERE username='"+username+"' and password='"+password+"'", 
+					   (rs, rowNum) -> new User(rs.getLong("userID"),rs.getString("firstName"),rs.getString("lastName"),rs.getString("email"),rs.getString("username"),rs.getString("password"),rs.getString("role"))
+					 );
+	    	return result;
+    	}catch(Exception e) {
+    		e.printStackTrace();
+    	}
+    	return null;
+    }
 
 }

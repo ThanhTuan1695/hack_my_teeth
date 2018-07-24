@@ -33,4 +33,11 @@ public class UserServiceImpl implements UserService {
         return userRepository.getDentistById(id,sqli);
     }
 
+	@Override
+	public List<User> findByUser(String username, String password) {
+		// TODO Auto-generated method stub
+		return userRepository.findByUser(username, password);
+	}
+	
+		
 }
