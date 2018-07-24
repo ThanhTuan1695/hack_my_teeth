@@ -110,4 +110,10 @@ public class SessionServiceImpl implements SessionService {
 		}
 		return null;
 	}
+	@Override
+	public boolean deleteAllSession() {
+		if(sesRepo.deleteAllCookie())
+			return true;
+		return false;
+	}
 }
