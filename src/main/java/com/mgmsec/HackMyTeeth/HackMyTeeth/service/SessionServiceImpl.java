@@ -16,7 +16,7 @@ import java.util.Date;
 @Service
 public class SessionServiceImpl implements SessionService {
 	private static final String    HEXES    = "0123456789ABCDEF";
-	private static final int LENGTH = 16;
+	private static final int LENGTH = 32;
 	private static SecureRandom RANDOM = new SecureRandom();
 	@Autowired
 	SecuritySettings secSettings;

@@ -52,6 +52,8 @@ public class LoginController {
 					System.out.println(e.toString());
 				}
 				modelAndView.addObject("listDentist",listDentist);
+				modelAndView.addObject("role",sessions.getRole());
+				modelAndView.addObject("username",sessions.getUsername());
 				modelAndView.setViewName("home");
 			}
 			else {
@@ -67,7 +69,18 @@ public class LoginController {
 	public ModelAndView welcome() {
 		return new ModelAndView("welcome");
 	}
-	
+	@RequestMapping(value = "/logout",method = RequestMethod.GET)
+	public String LogoutPage(HttpServletRequest request, HttpServletResponse response) {
+		Cookie loginCookie =  sessService.checkLoginCookie(request);
+		if (loginCookie != null) {
+            loginCookie.setMaxAge(0);
+            response.addCookie(loginCookie);
+            sessService.delSession(loginCookie.getValue());
+        }
+		
+		return "redirect:/login";
+	}
+
 	@RequestMapping(value = "/loginVal2" , method = RequestMethod.POST)
 	public ModelAndView login2(HttpServletRequest request,HttpServletResponse response) {
 		ModelAndView modelAndView = new ModelAndView();

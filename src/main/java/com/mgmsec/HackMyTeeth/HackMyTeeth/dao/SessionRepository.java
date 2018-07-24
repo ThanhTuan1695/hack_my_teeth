@@ -56,7 +56,7 @@ public class SessionRepository {
     }
     public boolean deleteCookiebyString(String cookieID) {
     	try {
-    		jdbcTemplate.update("DELETE from session where sessCookie='?'",cookieID);
+    		jdbcTemplate.update("DELETE from session where sessCookie=?",cookieID);
     		return true;
     	}catch(Exception e) {
     		
