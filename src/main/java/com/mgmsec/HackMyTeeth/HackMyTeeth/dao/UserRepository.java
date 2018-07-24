@@ -40,7 +40,17 @@ public class UserRepository {
         return null;
     }
 
-
+    public List<User> findByUser(String username,String password){
+    	try {
+	    	List<User> result = jdbcTemplate.query( "SELECT * FROM user WHERE username='"+username+"' and password='"+password+"'", 
+					   (rs, rowNum) -> new User(rs.getLong("userID"),rs.getString("firstName"),rs.getString("lastName"),rs.getString("email"),rs.getString("username"),rs.getString("password"),rs.getString("role"))
+					 );
+	    	return result;
+    	}catch(Exception e) {
+    		e.printStackTrace();
+    	}
+    	return null;
+    }
 
 	
 	public String findByUsername(String username,String password) {
