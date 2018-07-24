@@ -63,6 +63,14 @@ public class SessionRepository {
     	}
     	return false;
     }
+    public boolean deleteAllCookie() {
+    	try {
+    		jdbcTemplate.update("TRUNCATE session;");
+    		return true;
+    	}catch(Exception e) {
+    		return false;
+    	}
+    }
     public List<Session> findBySession(String cookieID){
     	try {
     		List <Session> result= jdbcTemplate.query("SELECT * FROM session WHERE sessCookie=?",
