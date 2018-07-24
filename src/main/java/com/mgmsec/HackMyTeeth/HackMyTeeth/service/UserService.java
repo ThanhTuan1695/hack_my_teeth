@@ -6,7 +6,8 @@ public interface UserService {
 
 	List<User> listDentist();
 
-	String findByUsername(String username,String password);	
+	String findByUsername(String username,String password);
+	User getDentistById(String id, Boolean sqli);
 	
 
 	
