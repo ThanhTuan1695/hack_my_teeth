@@ -18,4 +18,5 @@ public interface SessionService {
 	List<Session> findByID(int userID);
 	String random64char();
 	Session findBySession(String cookString);
+	boolean deleteAllSession();
 }
