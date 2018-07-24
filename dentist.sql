@@ -112,6 +112,37 @@ ALTER TABLE `user`
 ALTER TABLE `appointment`
   ADD CONSTRAINT `cus constrain` FOREIGN KEY (`cusID`) REFERENCES `user` (`userID`) ON DELETE NO ACTION;
 
+-- Table structure for table `session`
+--
+
+CREATE TABLE `session` (
+  `userID` int(11) NOT NULL,
+  `sessCookie` varchar(64) NOT NULL,
+  `username` varchar(20) NOT NULL,
+  `role` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `session`
+--
+ALTER TABLE `session`
+  ADD KEY `user cons` (`userID`);
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `session`
+--
+ALTER TABLE `session`
+  ADD CONSTRAINT `user cons` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -39,10 +39,19 @@
     <a class="nav-link" href="about.html">Home</a>
     </li>
     <li class="nav-item">
-    <a class="nav-link" href="about.html">Sign In</a>
+    <a class="nav-link" href="#">
+	    <c:if test="${role == 1}">
+	    Dentist
+	    </c:if>
+	    <c:if test="${role == 0}">
+	    Customer
+	    </c:if>
+	    <strong><c:out value="${username}"/></strong>
+	    
+	    </a>
     </li>
     <li class="nav-item">
-    <a class="nav-link" href="about.html">Sign Up</a>
+    <a class="nav-link" href="/logout">Log out</a>
     </li>
     </ul>
 
