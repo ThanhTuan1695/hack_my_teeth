@@ -11,9 +11,9 @@ import java.util.List;
 
 @Repository
 public class AppointmentRepository {
-	 @Autowired
+	@Autowired
 	    private JdbcTemplate jdbcTemplate;
-	    private EntityManager manager;
+	    private EntityManager manager; 
 	    public List<Appointment> findAllAppointment(){
 	    	try {
 	    		List<Appointment> result = jdbcTemplate.query("SELECT * from user", (rs, rowNum) ->  new Appointment(rs.getInt("appID"),rs.getString("title"),rs.getString("time"),rs.getInt("cusID"),rs.getInt("denID"),rs.getString("description")));

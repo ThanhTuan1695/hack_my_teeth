@@ -7,7 +7,7 @@ public interface UserService {
 	List<User> listDentist();
 
 	String findByUsername(String username,String password);	
-	
+	List<User> findByUser(String username,String password);
 
 	
 }
