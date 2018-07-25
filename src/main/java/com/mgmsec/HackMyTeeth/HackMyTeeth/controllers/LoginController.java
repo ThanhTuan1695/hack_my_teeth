@@ -22,6 +22,8 @@ import com.mgmsec.HackMyTeeth.HackMyTeeth.service.UserService;
 import com.mgmsec.HackMyTeeth.HackMyTeeth.service.SessionService;
 
 import com.mgmsec.HackMyTeeth.HackMyTeeth.setting.SecuritySettings;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 @Controller
 //@Scope("session")
 public class LoginController {
@@ -85,14 +87,13 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/loginVal2" , method = RequestMethod.POST)
-	public ModelAndView login2(HttpServletRequest request,HttpServletResponse response) {
+	public ModelAndView login2(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView modelAndView = new ModelAndView();
 		List<User> get = userService.findByUser(request.getParameter("username"), request.getParameter("password"));
-		System.out.print(1);
-		if(get == null) {
+		System.out.print(get);
+		if(get == null || get.size() == 0) {
 			modelAndView.addObject("errorMessage", "Invalid username or password");
 			modelAndView.setViewName("login");
-			
 		}else if(get.get(0).getRole().equals("1")) {
 			setSessionCookie(request,response,get.get(0).getUsername(),Integer.parseInt(get.get(0).getRole()),(int) get.get(0).getuserID());
 			return new ModelAndView("redirect:/home");
@@ -103,7 +104,7 @@ public class LoginController {
 
 		}
 		return modelAndView;
-		
+
 	}
 	private void setSessionCookie(HttpServletRequest request, HttpServletResponse response, String username, int role, int userID ) {
 		String sessionid = null;

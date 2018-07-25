@@ -4,6 +4,7 @@ import com.mgmsec.HackMyTeeth.HackMyTeeth.model.Session;
 import com.mgmsec.HackMyTeeth.HackMyTeeth.model.User;
 import com.mgmsec.HackMyTeeth.HackMyTeeth.service.SessionService;
 import com.mgmsec.HackMyTeeth.HackMyTeeth.service.UserService;
+import com.mgmsec.HackMyTeeth.HackMyTeeth.setting.SecuritySettings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
@@ -25,8 +26,11 @@ public class DentistController {
     @Autowired
     SessionService sessService;
 
+//    @Autowired
+//    priate Environment environment;
+
     @Autowired
-    private Environment environment;
+    SecuritySettings secSettings;
 
     @Value("${security.SQLI}")
     private Boolean sqlinjection;
@@ -35,20 +39,22 @@ public class DentistController {
     public ModelAndView dentistPage(HttpServletRequest request, Model model) {
         ModelAndView modelAndView = new ModelAndView();
         Cookie loginCookie = sessService.checkLoginCookie(request);
+        System.out.println("hfhgf      "+secSettings.getSqli());
         if(loginCookie != null) {
             System.out.println("Login Cookie is: in dentist " +loginCookie.getValue());
 
             Session sessions = sessService.findBySession(loginCookie.getValue());
             if (sessions != null) {
-                String slqi = environment.getProperty("security.SQLI");
-                System.out.println(slqi);
+//                String slqi = environment.getProperty("security.SQLI");
                 String id = request.getParameter("id");
                 if (id == null) {
                     return new ModelAndView("redirect:/home");
                 }
-                User dentist = userService.getDentistById(id, sqlinjection);
-                System.out.println(userService.getDentistById(id, sqlinjection));
+                User dentist = userService.getDentistById(id, secSettings.getSqli());
+                System.out.println(userService.getDentistById(id, secSettings.getSqli()));
                 modelAndView.addObject("dentist", dentist);
+                modelAndView.addObject("role",sessions.getRole());
+                modelAndView.addObject("username",sessions.getUsername());
                 modelAndView.setViewName("dentist");
             }
             else {
