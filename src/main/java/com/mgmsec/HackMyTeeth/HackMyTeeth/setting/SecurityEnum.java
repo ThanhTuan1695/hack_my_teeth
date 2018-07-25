@@ -6,4 +6,5 @@ public class SecurityEnum {
 	public static enum PwdStorage { Clear, Hashed, SaltedHash, PBKDF}
 	public static enum SessFix { Yes, No };
 	public static enum LoginError { Yes, No, Timebased  };
+	public static Boolean Sqli;
 }
