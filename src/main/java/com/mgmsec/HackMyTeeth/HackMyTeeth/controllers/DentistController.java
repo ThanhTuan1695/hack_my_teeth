@@ -35,9 +35,8 @@ public class DentistController {
     public ModelAndView dentistPage(HttpServletRequest request, Model model) {
         ModelAndView modelAndView = new ModelAndView();
         Cookie loginCookie = sessService.checkLoginCookie(request);
-        System.out.println(loginCookie);
         if(loginCookie != null) {
-            System.out.println("Login Cookie is: " +loginCookie.getValue());
+            System.out.println("Login Cookie is: in dentist " +loginCookie.getValue());
 
             Session sessions = sessService.findBySession(loginCookie.getValue());
             if (sessions != null) {

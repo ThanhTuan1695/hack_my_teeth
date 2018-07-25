@@ -40,11 +40,13 @@ public class LoginController {
 	public ModelAndView home(HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
 		Cookie loginCookie = sessService.checkLoginCookie(request);
+		System.out.println("adsadasd    " + loginCookie);
 		if(loginCookie != null) {
 			System.out.println("Login Cookie is: " +loginCookie.getValue());
-			
+
 			Session sessions = sessService.findBySession(loginCookie.getValue());
 			if (sessions != null) {
+
 				System.out.println("session is" + sessions);
 				List<User> listDentist = userService.listDentist();
 				System.out.println(listDentist);
@@ -57,11 +59,12 @@ public class LoginController {
 				modelAndView.setViewName("home");
 			}
 			else {
-				modelAndView.setViewName("login");
+				return new ModelAndView("redirect:/login");
+
 			}
 		}
 		else {
-			modelAndView.setViewName("login");
+			return new ModelAndView("redirect:/login");
 		}
 		return modelAndView;
 	}
@@ -85,7 +88,7 @@ public class LoginController {
 	public ModelAndView login2(HttpServletRequest request,HttpServletResponse response) {
 		ModelAndView modelAndView = new ModelAndView();
 		List<User> get = userService.findByUser(request.getParameter("username"), request.getParameter("password"));
-		System.out.print(get.get(0));
+		System.out.print(1);
 		if(get == null) {
 			modelAndView.addObject("errorMessage", "Invalid username or password");
 			modelAndView.setViewName("login");
