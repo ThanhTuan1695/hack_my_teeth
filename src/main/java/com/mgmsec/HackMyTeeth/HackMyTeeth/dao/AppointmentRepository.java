@@ -14,9 +14,11 @@ public class AppointmentRepository {
 	@Autowired
 	    private JdbcTemplate jdbcTemplate;
 	    private EntityManager manager; 
-	    public List<Appointment> findAllAppointment(){
+	    public List<Appointment> findAll(String username){
 	    	try {
-	    		List<Appointment> result = jdbcTemplate.query("SELECT * from user", (rs, rowNum) ->  new Appointment(rs.getInt("appID"),rs.getString("title"),rs.getString("time"),rs.getInt("cusID"),rs.getInt("denID"),rs.getString("description")));
+	    		List<Appointment> result = jdbcTemplate.query("SELECT a.appID,a.title,a.time, CONCAT(u.firstName,' ',u.lastName) as cusName,CONCAT(ut.firstName,' ',ut.lastName) as denName,a.description FROM appointment a JOIN user u JOIN user ut ON a.cusID = u.userID AND a.denID = ut.userID AND a.denID= (SELECT userID FROM user WHERE username='"+username+"')", 
+	    				(rs, rowNum) ->  new Appointment(rs.getInt("appID"),rs.getString("title"),rs.getString("time"),rs.getString("cusName"),rs.getString("denName"),rs.getString("description")));
+	    		System.out.print(result);
 	    		return result;
 	    	}
 	    	catch(Exception e) {

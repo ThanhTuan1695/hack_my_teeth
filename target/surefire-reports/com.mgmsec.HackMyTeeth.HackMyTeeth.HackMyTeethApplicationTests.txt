@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 Test set: com.mgmsec.HackMyTeeth.HackMyTeeth.HackMyTeethApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.472 s <<< FAILURE! - in com.mgmsec.HackMyTeeth.HackMyTeeth.HackMyTeethApplicationTests
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.521 s <<< FAILURE! - in com.mgmsec.HackMyTeeth.HackMyTeeth.HackMyTeethApplicationTests
 initializationError(com.mgmsec.HackMyTeeth.HackMyTeeth.HackMyTeethApplicationTests)  Time elapsed: 0.013 s  <<< ERROR!
 java.lang.Exception: No runnable methods
 
