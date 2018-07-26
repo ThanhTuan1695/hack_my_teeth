@@ -13,6 +13,8 @@ public class SecuritySettings {
     private SessFix sessFix;
     private LoginError logErr;
     private Boolean sqli;
+    private ResetPassword resetPassword;
+
 
     public void setSqli(Boolean sqli) {
         this.sqli = sqli;
@@ -60,6 +62,15 @@ public class SecuritySettings {
 
     public void setPwdStorage(PwdStorage pwdStorage) {
         this.pwdStorage = pwdStorage;
+    }
+
+
+    public ResetPassword getResetPassword() {
+        return resetPassword;
+    }
+
+    public void setResetPassword(ResetPassword resetPassword) {
+        this.resetPassword = resetPassword;
     }
 
 }

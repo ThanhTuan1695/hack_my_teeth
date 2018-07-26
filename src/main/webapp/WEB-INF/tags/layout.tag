@@ -38,6 +38,9 @@
     <li class="nav-item">
     <a class="nav-link" href="/home">Home</a>
     </li>
+        <li class="nav-item">
+    <a class="nav-link" href="/setting">Setting</a>
+    </li>
     <li class="nav-item">
     <a class="nav-link" href="#">
 	    <c:if test="${role == 1}">

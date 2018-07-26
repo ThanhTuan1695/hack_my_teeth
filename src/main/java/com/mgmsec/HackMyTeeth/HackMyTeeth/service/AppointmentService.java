@@ -3,5 +3,5 @@ import com.mgmsec.HackMyTeeth.HackMyTeeth.model.Appointment;
 import java.util.List;
 
 public interface AppointmentService {
-	List<Appointment> findAll();
+	List<Appointment> findAll(String username);
 }
