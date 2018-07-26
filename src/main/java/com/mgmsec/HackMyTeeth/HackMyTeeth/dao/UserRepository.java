@@ -1,6 +1,7 @@
 package com.mgmsec.HackMyTeeth.HackMyTeeth.dao;
 
 import com.mgmsec.HackMyTeeth.HackMyTeeth.model.User;
+import com.mgmsec.HackMyTeeth.HackMyTeeth.setting.SecuritySettings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -19,6 +21,11 @@ public class UserRepository {
     private JdbcTemplate jdbcTemplate;
     private EntityManager manager;
 
+    @Autowired
+    SecuritySettings secSetting;
+    
+    
+    
     public List<User> findAll() {
         try {
             List<User> result = jdbcTemplate.query("SELECT * from user", (rs, rowNum) -> new User(rs.getLong("userID"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("email"), rs.getString("username"), rs.getString("password"), rs.getString("role")));
@@ -85,9 +92,17 @@ public class UserRepository {
     }
     public List<User> findByUser(String username,String password){
     	try {
-	    	List<User> result = jdbcTemplate.query( "SELECT * FROM user WHERE username='"+username+"' and password='"+password+"'", 
-					   (rs, rowNum) -> new User(rs.getLong("userID"),rs.getString("firstName"),rs.getString("lastName"),rs.getString("email"),rs.getString("username"),rs.getString("password"),rs.getString("role"))
-					 );
+    		List<User> result = new ArrayList<User>();
+
+    		if(secSetting.getSqli()) {
+    			 result = jdbcTemplate.query( "SELECT * FROM user WHERE username=? and password=?", 
+  					   (rs, rowNum) -> new User(rs.getLong("userID"),rs.getString("firstName"),rs.getString("lastName"),rs.getString("email"),rs.getString("username"),rs.getString("password"),rs.getString("role"))
+  					 ,username,password);}
+    		else {
+    		  	result = jdbcTemplate.query( "SELECT * FROM user WHERE username='"+username+"' and password='"+password+"'", 
+ 					   (rs, rowNum) -> new User(rs.getLong("userID"),rs.getString("firstName"),rs.getString("lastName"),rs.getString("email"),rs.getString("username"),rs.getString("password"),rs.getString("role"))
+ 					 );}
+    	
 	    	return result;
     	}catch(Exception e) {
     		e.printStackTrace();

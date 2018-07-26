@@ -53,7 +53,7 @@ INSERT INTO `appointment` (`appID`, `title`, `time`, `description`, `cusID`, `de
 CREATE TABLE `user` (
   `userID` int(11) NOT NULL,
   `username` varchar(20) NOT NULL,
-  `password` varchar(20) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `firstName` varchar(255) NOT NULL,
   `lastName` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
