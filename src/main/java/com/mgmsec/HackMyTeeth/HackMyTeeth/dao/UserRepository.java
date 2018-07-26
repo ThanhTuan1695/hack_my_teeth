@@ -70,7 +70,19 @@ public class UserRepository {
 			}
 		return null;
     
-}
+	}
+	
+	public void resetAllPassword(List<String> passwords) {
+		try {
+			int id = 1; 
+			for(String password: passwords) {
+				jdbcTemplate.update("UPDATE user SET password = ? WHERE userID = ?",
+						password, id++);
+			}
+		} catch (Exception e) {
+			e.getStackTrace();
+		}
+	}
 	
 
 }

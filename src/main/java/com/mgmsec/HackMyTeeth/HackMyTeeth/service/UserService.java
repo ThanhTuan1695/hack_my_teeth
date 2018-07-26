@@ -1,5 +1,6 @@
 package com.mgmsec.HackMyTeeth.HackMyTeeth.service;
 import com.mgmsec.HackMyTeeth.HackMyTeeth.model.User;
+
 import java.util.List;
 public interface UserService {
 	List<User> findAll();	
@@ -8,6 +9,6 @@ public interface UserService {
 
 	String findByUsername(String username,String password);	
 	List<User> findByUser(String username,String password);
-
+	boolean resetAllPassword();
 	
 }

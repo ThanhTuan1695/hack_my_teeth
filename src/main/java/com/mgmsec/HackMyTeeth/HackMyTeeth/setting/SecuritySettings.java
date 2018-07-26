@@ -6,12 +6,14 @@ import com.mgmsec.HackMyTeeth.HackMyTeeth.setting.SecurityEnum.*;
 
 @Component
 @ConfigurationProperties(prefix="security")
-public class SecuritySettings {
+public class SecuritySettings{
 	private UseCookie useCookie;
 	private PwdStorage pwdStorage;
 	private CookieParam cookParam;
 	private SessFix sessFix;
 	private LoginError logErr;
+	private ResetPassword resetPassword;
+	
 	public CookieParam getCookParam() {
 		return cookParam;
 	}
@@ -41,6 +43,14 @@ public class SecuritySettings {
 	}
 	public void setPwdStorage(PwdStorage pwdStorage) {
 		this.pwdStorage = pwdStorage;
+	}
+
+	public ResetPassword getResetPassword() {
+		return resetPassword;
+	}
+
+	public void setResetPassword(ResetPassword resetPassword) {
+		this.resetPassword = resetPassword;
 	}
 	
 }
