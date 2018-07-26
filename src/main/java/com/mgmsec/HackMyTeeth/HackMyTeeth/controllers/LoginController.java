@@ -21,6 +21,7 @@ import com.mgmsec.HackMyTeeth.HackMyTeeth.model.Session;
 
 import com.mgmsec.HackMyTeeth.HackMyTeeth.service.UserService;
 import com.mgmsec.HackMyTeeth.HackMyTeeth.service.AppointmentService;
+import com.mgmsec.HackMyTeeth.HackMyTeeth.service.PasswordService;
 import com.mgmsec.HackMyTeeth.HackMyTeeth.service.SessionService;
 
 import com.mgmsec.HackMyTeeth.HackMyTeeth.setting.SecuritySettings;
@@ -37,6 +38,8 @@ public class LoginController {
 	SessionService sessService;
 	@Autowired
 	SecuritySettings secSettings;
+	@Autowired
+	PasswordService pwdService;
 	@RequestMapping("/login")
 	public ModelAndView firstPage() {
 		return new ModelAndView("login");
@@ -125,7 +128,17 @@ public class LoginController {
 	@RequestMapping(value = "/loginVal2" , method = RequestMethod.POST)
 	public ModelAndView login2(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView modelAndView = new ModelAndView();
-		List<User> get = userService.findByUser(request.getParameter("username"), request.getParameter("password"));
+		String password = request.getParameter("password");
+		switch(secSettings.getPwdStorage()) {
+		case Clear:
+			break;
+		case Hashed:
+			password = pwdService.sha256(password);
+			break;
+		}
+		System.out.println(password);
+		List<User> get = userService.findByUser(request.getParameter("username"), password);
+		
 		System.out.print(get);
 		if(get == null || get.size() == 0) {
 			modelAndView.addObject("errorMessage", "Invalid username or password");

@@ -18,6 +18,7 @@ import org.springframework.ui.Model;
 
 import com.mgmsec.HackMyTeeth.HackMyTeeth.model.User;
 import com.mgmsec.HackMyTeeth.HackMyTeeth.model.Session;
+import com.mgmsec.HackMyTeeth.HackMyTeeth.service.PasswordService;
 
 import com.mgmsec.HackMyTeeth.HackMyTeeth.service.UserService;
 import com.mgmsec.HackMyTeeth.HackMyTeeth.service.SessionService;
@@ -34,13 +35,15 @@ public class SettingController {
     SessionService sessService;
     @Autowired
     SecuritySettings secSettings;
-
+    @Autowired
+    PasswordService pwdService;
 
     @RequestMapping(value = "/settingVal", method = RequestMethod.POST)
     public ModelAndView settingVal(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView modelAndView = new ModelAndView();
         UseCookie useCookie = UseCookie.Base64;
         CookieParam cookieParam = CookieParam.True;
+        PwdStorage pwdStorage = PwdStorage.Clear;
         SessFix sessFix = SessFix.Yes;
         switch (request.getParameter("UseCookie")) {
             case "Base64":
@@ -74,13 +77,30 @@ public class SettingController {
                 secSettings.setSqli(true);
                 break;
         }
+        switch (request.getParameter("PwdStorage")) {
+	        case "Clear":
+	            pwdStorage = PwdStorage.Clear;
+	            break;
+	        case "Hashed":
+	        	pwdStorage = PwdStorage.Hashed;
+	            break;
+        }
         secSettings.setCookParam(cookieParam);
         secSettings.setUseCookie(useCookie);
         secSettings.setSessFix(sessFix);
+        secSettings.setPwdStorage(pwdStorage);
         if (sessService.deleteAllSession()) {
-            modelAndView.addObject("errorMessage", "ALl Cookies in DB are deleted!");
+            
+            if(userService.resetAllPassword()) {
+            	modelAndView.addObject("errorMessage", "ALl Cookies and PWD in DB are deleted!");
+            	
+            }
+            else {
+            	modelAndView.addObject("errorMessage", "ALl Cookies in DB are deleted!");
+
+            }
         }
-        modelAndView.setViewName("/login");
+        modelAndView.setViewName("redirect:/login");
         return modelAndView;
     }
 

@@ -12,6 +12,13 @@
 
             <div>
                 <form  method="POST" action="/settingVal">
+                	<div class="form-group">
+                        <label for="UseCookie"><strong>Password Storage</strong></label>
+                        <select class="form-control" name="PwdStorage" id="PwdStorage" required>
+                            <option value="Clear">Cleartext</option>
+                            <option value="Hashed">SHA256</option>
+                        </select>
+                    </div>
                     <div class="form-group">
                         <label for="UseCookie"><strong>Cookie Type</strong></label>
                         <select class="form-control" name="UseCookie" id="UseCookie" required>
