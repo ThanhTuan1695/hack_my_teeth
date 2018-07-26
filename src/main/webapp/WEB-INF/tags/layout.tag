@@ -26,7 +26,7 @@
     <!-- Navigation -->
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-    <a class="navbar-brand" href="index.html">Dentist Booking</a>
+    <a class="navbar-brand" href="/home">Dentist Booking</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
     </button>
@@ -36,7 +36,7 @@
     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
     </form>
     <li class="nav-item">
-    <a class="nav-link" href="about.html">Home</a>
+    <a class="nav-link" href="/home">Home</a>
     </li>
     <li class="nav-item">
     <a class="nav-link" href="#">
