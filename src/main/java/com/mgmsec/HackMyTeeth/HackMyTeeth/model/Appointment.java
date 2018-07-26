@@ -4,8 +4,8 @@ public class Appointment {
 	private int appID;
 	private String title;
 	private String time;
-	private int cusID;
-	private int denID;
+	private String cusName;
+	private String denName;
 	private String description;
 	public int getAppID() {
 		return appID;
@@ -25,17 +25,17 @@ public class Appointment {
 	public void setTime(String time) {
 		this.time = time;
 	}
-	public int getCusID() {
-		return cusID;
+	public String getCusName() {
+		return cusName;
 	}
-	public void setCusID(int cusID) {
-		this.cusID = cusID;
+	public void setCusName(String cusName) {
+		this.cusName = cusName;
 	}
-	public int getDenID() {
-		return denID;
+	public String getDenName() {
+		return denName;
 	}
-	public void setDenID(int denID) {
-		this.denID = denID;
+	public void setDenID(String denName) {
+		this.denName = denName;
 	}
 	public String getDescription() {
 		return description;
@@ -43,19 +43,19 @@ public class Appointment {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Appointment(int appID, String title, String time, int cusID, int denID, String description) {
+	public Appointment(int appID, String title, String time, String cusName, String denName, String description) {
 		super();
 		this.appID = appID;
 		this.title = title;
 		this.time = time;
-		this.cusID = cusID;
-		this.denID = denID;
+		this.cusName = cusName;
+		this.denName = denName;
 		this.description = description;
 	}
 	@Override
 	public String toString() {
-		return "Appointment [appID=" + appID + ", title=" + title + ", time=" + time + ", cusID=" + cusID + ", denID="
-				+ denID + ", description=" + description + "]";
+		return "Appointment [appID=" + appID + ", title=" + title + ", time=" + time + ", cusName=" + cusName + ", denName="
+				+ denName + ", description=" + description + "]";
 	}
 	
 }

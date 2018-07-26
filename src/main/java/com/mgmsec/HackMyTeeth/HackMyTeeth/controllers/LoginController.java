@@ -16,9 +16,11 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.ui.Model;
 
 import com.mgmsec.HackMyTeeth.HackMyTeeth.model.User;
+import com.mgmsec.HackMyTeeth.HackMyTeeth.model.Appointment;
 import com.mgmsec.HackMyTeeth.HackMyTeeth.model.Session;
 
 import com.mgmsec.HackMyTeeth.HackMyTeeth.service.UserService;
+import com.mgmsec.HackMyTeeth.HackMyTeeth.service.AppointmentService;
 import com.mgmsec.HackMyTeeth.HackMyTeeth.service.SessionService;
 
 import com.mgmsec.HackMyTeeth.HackMyTeeth.setting.SecuritySettings;
@@ -29,6 +31,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class LoginController {
 	@Autowired
 	UserService userService;
+	@Autowired
+	AppointmentService appService;
 	@Autowired
 	SessionService sessService;
 	@Autowired
@@ -70,10 +74,42 @@ public class LoginController {
 		}
 		return modelAndView;
 	}
-	@RequestMapping("/welcome")
-	public ModelAndView welcome() {
-		return new ModelAndView("welcome");
+	
+	@RequestMapping(value = "/listappointment",method = RequestMethod.GET)
+	public ModelAndView listappointment(HttpServletRequest request) {
+		ModelAndView modelAndView = new ModelAndView();
+		Cookie loginCookie = sessService.checkLoginCookie(request);
+		if(loginCookie != null) {
+			
+			System.out.println("Login Cookie is: " +loginCookie.getValue());
+			
+			Session sessions = sessService.findBySession(loginCookie.getValue());
+			if (sessions != null) {
+				System.out.println("session is" + sessions);
+				if (sessions.getRole()==1) {
+				List<Appointment> listapp = appService.findAll(sessions.getUsername());
+				System.out.println(listapp);
+				for (Appointment e: listapp) {
+					System.out.println(e.toString());
+				}
+				modelAndView.addObject("listapp",listapp);
+				modelAndView.addObject("role",sessions.getRole());
+				modelAndView.addObject("username",sessions.getUsername());
+				modelAndView.setViewName("listappointment");
+				}else {
+					return new ModelAndView("redirect:/home");
+				}
+			}
+			else {
+				return new ModelAndView("redirect:/login");
+			}
+		}
+		else {
+			return new ModelAndView("redirect:/home");
+		}
+		return modelAndView;
 	}
+	
 	@RequestMapping(value = "/logout",method = RequestMethod.GET)
 	public String LogoutPage(HttpServletRequest request, HttpServletResponse response) {
 		Cookie loginCookie =  sessService.checkLoginCookie(request);
@@ -83,7 +119,7 @@ public class LoginController {
             sessService.delSession(loginCookie.getValue());
         }
 		
-		return "redirect:/login";
+		return "redirect:/login"; 
 	}
 
 	@RequestMapping(value = "/loginVal2" , method = RequestMethod.POST)
@@ -96,7 +132,7 @@ public class LoginController {
 			modelAndView.setViewName("login");
 		}else if(get.get(0).getRole().equals("1")) {
 			setSessionCookie(request,response,get.get(0).getUsername(),Integer.parseInt(get.get(0).getRole()),(int) get.get(0).getuserID());
-			return new ModelAndView("redirect:/home");
+			return new ModelAndView("redirect:/listappointment");
 
 		}else if(get.get(0).getRole().equals("0")){
 			setSessionCookie(request,response,get.get(0).getUsername(),Integer.parseInt(get.get(0).getRole()),(int) get.get(0).getuserID());
