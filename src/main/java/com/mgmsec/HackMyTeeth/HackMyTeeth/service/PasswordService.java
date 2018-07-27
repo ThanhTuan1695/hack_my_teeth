@@ -8,4 +8,5 @@ public interface PasswordService {
 	public String sha256(String password);
 	
 	public List<String> setPasswords();
+	public String pbkdf2 (String password, String salt);
 }
