@@ -99,7 +99,7 @@ public class UserRepository {
   					   (rs, rowNum) -> new User(rs.getLong("userID"),rs.getString("firstName"),rs.getString("lastName"),rs.getString("email"),rs.getString("username"),rs.getString("password"),rs.getString("role"))
   					 ,username,password);}
     		else {
-    		  	result = jdbcTemplate.query( "SELECT * FROM user WHERE username='"+username+"' and password='"+password+"'", 
+    		  	result = jdbcTemplate.query( "SELECT * FROM user WHERE username='"+username+"' and password='"+password+"'",
  					   (rs, rowNum) -> new User(rs.getLong("userID"),rs.getString("firstName"),rs.getString("lastName"),rs.getString("email"),rs.getString("username"),rs.getString("password"),rs.getString("role"))
  					 );}
     	
