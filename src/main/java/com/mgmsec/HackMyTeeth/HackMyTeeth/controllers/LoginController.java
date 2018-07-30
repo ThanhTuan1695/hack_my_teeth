@@ -162,15 +162,17 @@ public class LoginController {
 		String sessionid = null;
 		switch(secSettings.getSessFix()) {
 			case Yes:
-				sessionid = sessService.addSession(userID, username, role);
+				sessionid = sessService.addSession(userID, username, role,"");
 				break;
 			case No:
 				Cookie loginCookie =  sessService.checkLoginCookie(request);
 				if (loginCookie != null) {
 		            sessionid = loginCookie.getValue();
+		            sessionid = sessService.addSession(userID, username, role,sessionid);
 		        }
 				else {
-					sessionid = sessService.addSession(userID, username, role);
+					sessionid = sessService.addSession(userID, username, role,"");
+				
 				}
 				break;
 		}

@@ -60,22 +60,25 @@ public class SessionServiceImpl implements SessionService {
 	}
 	
 	@Override
-	public String addSession(int userID, String username, int role) {
-		String cookieID = "";
+	public String addSession(int userID, String username, int role,String cookieID) {
+		
 		try {
-		switch (secSettings.getUseCookie()) {
-			case Base64:
-			    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");  
-			    Date date = new Date();  
-			    String tobeEncode = Integer.toString(userID) + "|" + username + "|" + formatter.format(date);
-				cookieID = java.util.Base64.getEncoder().encodeToString(tobeEncode.getBytes());
-				
-				break;
-			case Secure:
-				cookieID = random64char();
-				
-				break;
-			}
+		if(cookieID.equalsIgnoreCase("")) {
+			switch (secSettings.getUseCookie()) {
+				case Base64:
+				    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");  
+				    Date date = new Date();  
+				    String tobeEncode = Integer.toString(userID) + "|" + username + "|" + formatter.format(date);
+					cookieID = java.util.Base64.getEncoder().encodeToString(tobeEncode.getBytes());
+					
+					break;
+				case Secure:
+					cookieID = random64char();
+					
+					break;
+				}
+		}
+		
 		if( sesRepo.createNewCookie(userID, username, role, cookieID) == true) {
 			return cookieID;
 		}
