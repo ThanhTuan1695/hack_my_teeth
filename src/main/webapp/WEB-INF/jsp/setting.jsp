@@ -35,14 +35,14 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="SessFix"><strong>Cookie Type</strong></label>
+                        <label for="SessFix"><strong>Session Fixtation Protection</strong></label>
                         <select  class="form-control" name="SessFix" id="SessFix" required>
                             <option value="Yes">Yes</option>
                             <option value="No">No</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="Sqli"><strong>Sql Injection</strong></label>
+                        <label for="Sqli"><strong>SQL Injection Protection]</strong></label>
                         <select class="form-control" name="Sqli" id="Sqli" required>
                             <option value="1">Yes</option>
                             <option value="0">No</option>
