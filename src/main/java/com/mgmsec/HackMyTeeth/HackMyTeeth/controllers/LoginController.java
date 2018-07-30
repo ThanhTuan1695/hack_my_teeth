@@ -90,15 +90,15 @@ public class LoginController {
 			if (sessions != null) {
 				System.out.println("session is" + sessions);
 				if (sessions.getRole()==1) {
-				List<Appointment> listapp = appService.findAll(sessions.getUsername());
-				System.out.println(listapp);
-				for (Appointment e: listapp) {
-					System.out.println(e.toString());
-				}
-				modelAndView.addObject("listapp",listapp);
-				modelAndView.addObject("role",sessions.getRole());
-				modelAndView.addObject("username",sessions.getUsername());
-				modelAndView.setViewName("listappointment");
+					List<Appointment> listapp = appService.findAll(sessions.getUsername());
+					System.out.println(listapp);
+					for (Appointment e: listapp) {
+						System.out.println(e.toString());
+					}
+					modelAndView.addObject("listapp",listapp);
+					modelAndView.addObject("role",sessions.getRole());
+					modelAndView.addObject("username",sessions.getUsername());
+					modelAndView.setViewName("listappointment");
 				}else {
 					return new ModelAndView("redirect:/home");
 				}
@@ -130,11 +130,11 @@ public class LoginController {
 		ModelAndView modelAndView = new ModelAndView();
 		String password = request.getParameter("password");
 		switch(secSettings.getPwdStorage()) {
-		case Clear:
-			break;
-		case Hashed:
-			password = pwdService.sha256(password);
-			break;
+			case Clear:
+				break;
+			case Hashed:
+				password = pwdService.sha256(password);
+				break;
 		}
 		System.out.println(password);
 		List<User> get = userService.findByUser(request.getParameter("username"), password);
