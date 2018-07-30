@@ -12,7 +12,6 @@
     <meta name="author" content="">
 
     <title>Modern Business - Start Bootstrap Template</title>
-
     <!-- Bootstrap core CSS -->
     <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
