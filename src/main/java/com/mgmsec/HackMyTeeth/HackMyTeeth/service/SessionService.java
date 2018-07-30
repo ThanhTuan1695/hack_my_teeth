@@ -14,7 +14,7 @@ import java.util.List;
 public interface SessionService {
 	String getHex(byte[] raw);
 	Cookie checkLoginCookie(HttpServletRequest request);
-	String addSession(int userID,String username, int role,String cookieID = "");
+	String addSession(int userID,String username, int role,String cookieID);
 	boolean delSession(String cookieID);
 	List<Session> findByID(int userID);
 	String random64char();
