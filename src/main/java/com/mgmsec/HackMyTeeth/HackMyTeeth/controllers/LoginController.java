@@ -44,7 +44,10 @@ public class LoginController {
 	public ModelAndView firstPage() {
 		return new ModelAndView("login");
 	}
-	
+	@RequestMapping("/")
+	public ModelAndView slash() {
+		return new ModelAndView("redirect:/login");
+	}
 	@RequestMapping("/home")
 	public ModelAndView home(HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();

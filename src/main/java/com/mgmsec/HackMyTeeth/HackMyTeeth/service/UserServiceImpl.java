@@ -41,6 +41,18 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> findByUser(String username, String password) {
 		// TODO Auto-generated method stub
+		switch (securitySettings.getPwdStorage()) {
+		case PBKDF:
+			String salt = userRepository.getSalt(username);
+			if (salt == null)
+				return null;
+			else {
+				password = passwordService.pbkdf2(password, salt);
+			}
+			break;
+		default:
+			break;
+		}
 		return userRepository.findByUser(username, password);
 	}
 	public User getDentistById(String id, Boolean sqli){
@@ -72,7 +84,7 @@ public class UserServiceImpl implements UserService {
 						hashedPasswords.add(passwordService.pbkdf2(item, salt));
 						saltList.add(salt);
 					}
-					userRepository.updateAllSaltColumn(saltList);
+				 	userRepository.updateAllSaltColumn(saltList);
 					userRepository.resetAllPassword(hashedPasswords);
 					break;
 					

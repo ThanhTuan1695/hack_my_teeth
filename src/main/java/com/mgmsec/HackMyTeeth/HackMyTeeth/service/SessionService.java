@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import java.util.List;
 public interface SessionService {
+	String getHex(byte[] raw);
 	Cookie checkLoginCookie(HttpServletRequest request);
 	String addSession(int userID,String username, int role);
 	boolean delSession(String cookieID);
