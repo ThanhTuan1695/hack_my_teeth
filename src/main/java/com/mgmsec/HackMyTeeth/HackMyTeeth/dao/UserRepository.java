@@ -1,6 +1,7 @@
 package com.mgmsec.HackMyTeeth.HackMyTeeth.dao;
 
 import com.mgmsec.HackMyTeeth.HackMyTeeth.model.User;
+import com.mgmsec.HackMyTeeth.HackMyTeeth.setting.SecurityEnum.PwdStorage;
 import com.mgmsec.HackMyTeeth.HackMyTeeth.setting.SecuritySettings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -90,10 +91,26 @@ public class UserRepository {
             return null;
         return result.get(0);
     }
+    public String getSalt(String username) {
+		List<User> result = new ArrayList<User>();
+
+    	try {
+    		result = jdbcTemplate.query( "SELECT * FROM user WHERE username=?", 
+					   (rs, rowNum) -> new User(rs.getLong("userID"),rs.getString("firstName"),rs.getString("lastName"),rs.getString("email"),rs.getString("username"),rs.getString("password"),rs.getString("role"),rs.getString("salt"))
+					 ,username);
+    		if(result.size() == 0)
+    			return null;
+    		else {
+    			return result.get(0).getSalt();
+    		}
+    	}catch (Exception e) {
+    		return null;
+    	}
+    }
     public List<User> findByUser(String username,String password){
     	try {
     		List<User> result = new ArrayList<User>();
-
+    		
     		if(secSetting.getSqli()) {
     			 result = jdbcTemplate.query( "SELECT * FROM user WHERE username=? and password=?", 
   					   (rs, rowNum) -> new User(rs.getLong("userID"),rs.getString("firstName"),rs.getString("lastName"),rs.getString("email"),rs.getString("username"),rs.getString("password"),rs.getString("role"),rs.getString("salt"))
@@ -114,11 +131,11 @@ public class UserRepository {
 		try {
 			int id = 1; 
 			for(String salt: salts) {
-				jdbcTemplate.update("UPDATE Users SET salt = ? WHERE id = ?",
+				jdbcTemplate.update("UPDATE user SET salt = ? WHERE userID = ?",
 						salt, id++);
 			}
 		} catch (Exception e) {
-			e.getStackTrace();
+			e.printStackTrace();
 		}
     }
     

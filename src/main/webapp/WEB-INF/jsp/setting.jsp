@@ -17,6 +17,7 @@
                         <select class="form-control" name="PwdStorage" id="PwdStorage" required>
                             <option value="Clear">Cleartext</option>
                             <option value="Hashed">SHA256</option>
+                            <option value="PBKDF">PBKDF</option>
                         </select>
                     </div>
                     <div class="form-group">

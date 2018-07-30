@@ -28,6 +28,5 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/root/Downloads/org-apache-commons-codec.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

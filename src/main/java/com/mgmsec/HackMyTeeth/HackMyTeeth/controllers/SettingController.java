@@ -84,6 +84,9 @@ public class SettingController {
 	        case "Hashed":
 	        	pwdStorage = PwdStorage.Hashed;
 	            break;
+	        case "PBKDF":
+	        	pwdStorage = PwdStorage.PBKDF;
+	            break;
         }
         secSettings.setCookParam(cookieParam);
         secSettings.setUseCookie(useCookie);

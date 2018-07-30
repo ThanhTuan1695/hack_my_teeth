@@ -11,7 +11,6 @@ import java.security.MessageDigest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import org.apache.commons.codec.binary.Hex;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
@@ -22,7 +21,7 @@ import java.security.spec.InvalidKeySpecException;
 @Service
 public class PasswordServiceImpl implements PasswordService{
 	@Autowired
-	private SessionServiceImpl sessService;
+	private SessionService sessService;
 	//for pbkdf later
 	public String getRandomString(int length) {
 		
