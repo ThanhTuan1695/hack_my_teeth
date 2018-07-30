@@ -27,15 +27,14 @@ public class User {
 	private String email;	
 	@Column(name="role")
 	private String role;
+	@Column(name="salt")
+	private String salt;
 	
-	
-	
-
 	public User() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(long userID, String firstName, String lastName, String email, String username, String password, String role) {
+	public User(long userID, String firstName, String lastName, String email, String username, String password, String role, String salt) {
 		super();
 		this.userID=userID;
 		this.firstName = firstName;
@@ -44,6 +43,7 @@ public class User {
 		this.username = username;
 		this.password = password;
 		this.role = role;
+		this.salt = salt;
 	}
 	
 	public long getuserID() {
@@ -86,11 +86,17 @@ public class User {
 	public void setRole(String role) {
 		this.role = role;
 	}
+	public String getSalt() {
+		return salt;
+	}
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
 	
 	@Override
 	public String toString() {
 
-		return "User [userID=" + userID + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", username=" + username +", role=" + role +"]";
+		return "User [userID=" + userID + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", username=" + username +", role=" + role +", salt=" + salt +"]";
 	}
 	
 	

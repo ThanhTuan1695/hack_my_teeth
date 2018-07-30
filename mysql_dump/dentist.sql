@@ -57,7 +57,8 @@ CREATE TABLE `user` (
   `firstName` varchar(255) NOT NULL,
   `lastName` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `role` tinyint(1) NOT NULL
+  `role` tinyint(1) NOT NULL,
+  `salt` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -65,7 +66,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`userID`, `username`, `password`, `firstName`, `lastName`, `email`, `role`) VALUES
-(1, 'ardy01', 'ardy123', 'Ardyanto', NULL, 'ardyoo@gmail.com', 0),
+(1, 'ardy01', 'ardy123', 'Ardyanto', 'Songoku', 'ardyoo@gmail.com', 0),
 (2, 'drEvil01', 'iamevil', 'Doctor Evil', 'Man', 'evil01@gmail.com', 1),
 (3, 'john02', 'johnny', 'John', 'Billing', 'john02@gmail.com', 0),
 (4, 'drTin02', 'iamtin', 'Tin', 'Tran', 'iamtin02@gmail.com', 1),
