@@ -43,7 +43,7 @@ public class LoginController {
 	public ModelAndView firstPage(Model model, HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
 		Cookie loginCookie = sessService.checkLoginCookie(request);
-		System.out.println(loginCookie);
+		System.out.println(secSettings.getPwBruteForce());
 		if (loginCookie != null) {
 			Session session = sessService.findBySession(loginCookie.getValue());
 			if (session != null) return new ModelAndView("redirect:/home");
@@ -60,7 +60,10 @@ public class LoginController {
 		modelAndView.setViewName("login");
 		return modelAndView;
 	}
-	
+	@RequestMapping("/")
+	public ModelAndView slash() {
+		return new ModelAndView("redirect:/login");
+	}
 	@RequestMapping("/home")
 	public ModelAndView home(HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -106,15 +109,15 @@ public class LoginController {
 			if (sessions != null) {
 				System.out.println("session is" + sessions);
 				if (sessions.getRole()==1) {
-				List<Appointment> listapp = appService.findAll(sessions.getUsername());
-				System.out.println(listapp);
-				for (Appointment e: listapp) {
-					System.out.println(e.toString());
-				}
-				modelAndView.addObject("listapp",listapp);
-				modelAndView.addObject("role",sessions.getRole());
-				modelAndView.addObject("username",sessions.getUsername());
-				modelAndView.setViewName("listappointment");
+					List<Appointment> listapp = appService.findAll(sessions.getUsername());
+					System.out.println(listapp);
+					for (Appointment e: listapp) {
+						System.out.println(e.toString());
+					}
+					modelAndView.addObject("listapp",listapp);
+					modelAndView.addObject("role",sessions.getRole());
+					modelAndView.addObject("username",sessions.getUsername());
+					modelAndView.setViewName("listappointment");
 				}else {
 					return new ModelAndView("redirect:/home");
 				}
@@ -149,11 +152,11 @@ public class LoginController {
 		String g_recaptcha_response = request.getParameter("g-recaptcha-response");
 		String ip = request.getRemoteAddr();
 		switch(secSettings.getPwdStorage()) {
-		case Clear:
-			break;
-		case Hashed:
-			password = pwdService.sha256(password);
-			break;
+			case Clear:
+				break;
+			case Hashed:
+				password = pwdService.sha256(password);
+				break;
 		}
 		switch (secSettings.getPwBruteForce()){
 			case Captcha:
@@ -192,15 +195,17 @@ public class LoginController {
 		String sessionid = null;
 		switch(secSettings.getSessFix()) {
 			case Yes:
-				sessionid = sessService.addSession(userID, username, role);
+				sessionid = sessService.addSession(userID, username, role,"");
 				break;
 			case No:
 				Cookie loginCookie =  sessService.checkLoginCookie(request);
 				if (loginCookie != null) {
 		            sessionid = loginCookie.getValue();
+		            sessionid = sessService.addSession(userID, username, role,sessionid);
 		        }
 				else {
-					sessionid = sessService.addSession(userID, username, role);
+					sessionid = sessService.addSession(userID, username, role,"");
+				
 				}
 				break;
 		}

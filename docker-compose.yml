@@ -21,7 +21,7 @@ services:
   app:
     image: whitenguyen2512/hack_my_teeth:latest
     ports:
-      - 8080:8080
+      - 8051:8080
     depends_on:
       - db
     restart: always
