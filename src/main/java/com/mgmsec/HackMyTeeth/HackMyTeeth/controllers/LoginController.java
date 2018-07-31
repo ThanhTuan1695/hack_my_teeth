@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Cookie;
 
+import com.mgmsec.HackMyTeeth.HackMyTeeth.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,11 +19,6 @@ import org.springframework.ui.Model;
 import com.mgmsec.HackMyTeeth.HackMyTeeth.model.User;
 import com.mgmsec.HackMyTeeth.HackMyTeeth.model.Appointment;
 import com.mgmsec.HackMyTeeth.HackMyTeeth.model.Session;
-
-import com.mgmsec.HackMyTeeth.HackMyTeeth.service.UserService;
-import com.mgmsec.HackMyTeeth.HackMyTeeth.service.AppointmentService;
-import com.mgmsec.HackMyTeeth.HackMyTeeth.service.PasswordService;
-import com.mgmsec.HackMyTeeth.HackMyTeeth.service.SessionService;
 
 import com.mgmsec.HackMyTeeth.HackMyTeeth.setting.SecuritySettings;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -40,9 +36,29 @@ public class LoginController {
 	SecuritySettings secSettings;
 	@Autowired
 	PasswordService pwdService;
+	@Autowired
+	CapchaService capchaService;
+
 	@RequestMapping("/login")
-	public ModelAndView firstPage() {
-		return new ModelAndView("login");
+	public ModelAndView firstPage(Model model, HttpServletRequest request) {
+		ModelAndView modelAndView = new ModelAndView();
+		Cookie loginCookie = sessService.checkLoginCookie(request);
+		System.out.println(secSettings.getPwBruteForce());
+		if (loginCookie != null) {
+			Session session = sessService.findBySession(loginCookie.getValue());
+			if (session != null) return new ModelAndView("redirect:/home");
+		}
+		System.out.println(secSettings.getPwBruteForce());
+		switch (secSettings.getPwBruteForce()){
+			case Captcha:
+				System.out.println("dsdsds");
+					model.addAttribute("isCaptchaEnabled",true);
+					break;
+				default:
+					break;
+		}
+		modelAndView.setViewName("login");
+		return modelAndView;
 	}
 	@RequestMapping("/")
 	public ModelAndView slash() {
@@ -129,9 +145,12 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/loginVal2" , method = RequestMethod.POST)
-	public ModelAndView login2(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView login2(HttpServletRequest request, HttpServletResponse response, Model model) {
 		ModelAndView modelAndView = new ModelAndView();
+		String username = request.getParameter("username");
 		String password = request.getParameter("password");
+		String g_recaptcha_response = request.getParameter("g-recaptcha-response");
+		String ip = request.getRemoteAddr();
 		switch(secSettings.getPwdStorage()) {
 			case Clear:
 				break;
@@ -139,8 +158,22 @@ public class LoginController {
 				password = pwdService.sha256(password);
 				break;
 		}
+		switch (secSettings.getPwBruteForce()){
+			case Captcha:
+				model.addAttribute("isCaptchaEnabled",true);
+				System.out.println(g_recaptcha_response  +  "---------------");
+				if(!capchaService.verifyResponse(g_recaptcha_response, ip)) {
+					modelAndView.addObject("errorMessage", "Check your captcha");
+					modelAndView.setViewName("login");
+					return modelAndView;
+				}
+
+				break;
+			default:
+				break;
+		}
 		System.out.println(password);
-		List<User> get = userService.findByUser(request.getParameter("username"), password);
+		List<User> get = userService.findByUser(username, password);
 		
 		System.out.print(get);
 		if(get == null || get.size() == 0) {

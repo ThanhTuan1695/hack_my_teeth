@@ -14,6 +14,7 @@ public class SecuritySettings {
     private LoginError logErr;
     private Boolean sqli;
     private ResetPassword resetPassword;
+    private PwBruteForce pwBruteForce;
 
 
     public void setSqli(Boolean sqli) {
@@ -71,6 +72,14 @@ public class SecuritySettings {
 
     public void setResetPassword(ResetPassword resetPassword) {
         this.resetPassword = resetPassword;
+    }
+
+    public PwBruteForce getPwBruteForce() {
+        return pwBruteForce;
+    }
+
+    public void setPwBruteForce(PwBruteForce pwBruteForce) {
+        this.pwBruteForce = pwBruteForce;
     }
 
 }
