@@ -88,6 +88,14 @@ public class SettingController {
 	        	pwdStorage = PwdStorage.PBKDF;
 	            break;
         }
+        switch (request.getParameter("captcha")) {
+            case "Captcha":
+                secSettings.setPwBruteForce(PwBruteForce.Captcha);
+                break;
+            default:
+                secSettings.setPwBruteForce(PwBruteForce.False);
+                break;
+        }
         secSettings.setCookParam(cookieParam);
         secSettings.setUseCookie(useCookie);
         secSettings.setSessFix(sessFix);

@@ -42,10 +42,17 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="Sqli"><strong>SQL Injection Protection]</strong></label>
+                        <label for="Sqli"><strong>SQL Injection Protection</strong></label>
                         <select class="form-control" name="Sqli" id="Sqli" required>
                             <option value="1">Yes</option>
                             <option value="0">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="captcha"><strong>Prevent Brute force password</strong></label>
+                        <select class="form-control" name="captcha" id="captcha" required>
+                            <option value="Captcha">Captcha</option>
+                            <option value="False">No</option>
                         </select>
                     </div>
                     <div class="form-group offset-md-5" >

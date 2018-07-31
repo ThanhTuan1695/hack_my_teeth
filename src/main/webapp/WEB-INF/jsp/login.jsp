@@ -22,7 +22,9 @@
 
     <!-- Custom styles for this template -->
     <link href="/static/css/signin.css" rel="stylesheet">
-
+      <c:if test="${isCaptchaEnabled}">
+          <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+      </c:if>
   </head>
 
   <body class="text-center">
@@ -32,7 +34,10 @@
       <label for="username" class="sr-only">Username</label>
       <input type="text" id="username" name="username" class="form-control" placeholder="Username" required autofocus>
       <label for="inputPassword" class="sr-only">Password</label>
-      <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+      <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
+        <c:if test="${isCaptchaEnabled}">
+            <div class="g-recaptcha" data-sitekey="6LfcKGcUAAAAAGeQnwfHGMakB4Eka9NfmftZ4UVs"></div>
+        </c:if>
       <div class="checkbox mb-3">
         <label>
           <input type="checkbox" value="remember-me"> Remember me
@@ -44,6 +49,7 @@
 			</c:if>
       
       <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+
     </form>
   </body>
 </html>

@@ -8,4 +8,5 @@ public class SecurityEnum {
 	public static enum LoginError { Yes, No, Timebased  };
 	public static Boolean Sqli;
 	public static enum ResetPassword { True, False };
+	public static enum PwBruteForce { Captcha, Userlockout, False };
 }
