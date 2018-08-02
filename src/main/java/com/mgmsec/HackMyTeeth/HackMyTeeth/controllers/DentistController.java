@@ -55,6 +55,8 @@ public class DentistController {
                 modelAndView.addObject("dentist", dentist);
                 modelAndView.addObject("role",sessions.getRole());
                 modelAndView.addObject("username",sessions.getUsername());
+                modelAndView.addObject("userID",sessions.getUserID());
+                modelAndView.addObject("denID",id);
                 modelAndView.setViewName("dentist");
             }
             else {
