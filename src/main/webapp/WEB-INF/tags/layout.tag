@@ -14,7 +14,13 @@
     <title>Modern Business - Start Bootstrap Template</title>
     <!-- Bootstrap core CSS -->
     <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    
+      <!-- Bootstrap core JavaScript -->
+    <script src="/static/vendor/jquery/jquery.min.js"></script>
+    <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+     
+   
     <!-- Custom styles for this template -->
     <link href="/static/css/modern-business.css" rel="stylesheet">
 
@@ -74,9 +80,7 @@
     <!-- /.container -->
     </footer>
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="/static/vendor/jquery/jquery.min.js"></script>
-    <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+   
 
     </body>
 

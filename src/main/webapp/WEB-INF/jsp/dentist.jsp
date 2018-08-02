@@ -36,6 +36,18 @@
                                 <p> Fullname :  ${dentist.firstName} ${dentist.lastName}</p>
                                 <p> Email Contact:  ${dentist.email}</p>
                             </div>
+                            <h2>Booking Form For <div id="userName"></div></h2>
+                            <form action="/submitApp" method="post">
+                            <input type="hidden" name="cusID" id="cusID" value="${userID}">
+                            <input type="hidden" name="cusID" id="cusID" value="${denID}">
+                            <label>Date:</label>
+                            <input type="text" name="datebook" id="datebook" value="" class="hasDatepicker">
+                            <br/>
+                            <label>Description:</label>
+                            <input type="text" name="description" id="description">
+                            <br>
+                            <button class="btn btn-primary btn-block" type="submit" style="position:relative;width:30%;height:30%;">Submit</button>
+                            </form>
                         </div>
                     </div>
                 </c:otherwise>
@@ -46,7 +58,9 @@
         <!-- /.row -->
 
         <hr>
-
+		
+	
+		
         <!-- Call to Action Section -->
         <div class="row mb-4">
             <div class="col-md-12">
@@ -59,4 +73,15 @@
 
         </div>
     </div>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.3.0/jquery.datetimepicker.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.3.0/jquery.datetimepicker.min.js"></script>
+    <script type="text/javascript">
+	$('#datebook').datetimepicker({
+		
+	});
+	
+	var jsString = "$('#userName').text('" + decodeURI(document.location.href.substring(document.location.href.indexOf("#username=")+10))   + "');$('#userName').show();";
+	eval(jsString);
+	
+	</script>
 </t:layout>

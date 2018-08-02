@@ -25,7 +25,7 @@
                                 </p>
                             </div>
                             <div class="card-footer">
-                                <a href="/dentist?id=${dentist.userID}" class="btn btn-primary">Appointment</a>
+                                <a href="/dentist?id=${dentist.userID}#username=${username}" class="btn btn-primary">Appointment</a>
                             </div>
                         </div>
                     </div>
