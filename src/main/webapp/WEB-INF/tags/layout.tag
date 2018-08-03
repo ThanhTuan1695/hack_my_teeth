@@ -46,21 +46,30 @@
         <li class="nav-item">
     <a class="nav-link" href="/setting">Setting</a>
     </li>
-    <li class="nav-item">
-    <a class="nav-link" href="#">
-	    <c:if test="${role == 1}">
-	    Dentist
-	    </c:if>
-	    <c:if test="${role == 0}">
-	    Customer
-	    </c:if>
-	    <strong><c:out value="${username}"/></strong>
-	    
-	    </a>
-    </li>
-    <li class="nav-item">
-    <a class="nav-link" href="/logout">Log out</a>
-    </li>
+    <c:choose>
+    <c:when test="${not empty username}">
+	    <li class="nav-item">
+	    <a class="nav-link" href="#">
+		    <c:if test="${role == 1}">
+		    Dentist
+		    </c:if>
+		    <c:if test="${role == 0}">
+		    Customer
+		    </c:if>
+		    <strong><c:out value="${username}"/></strong>
+		    
+		    </a>
+	    </li>
+	    <li class="nav-item">
+	    <a class="nav-link" href="/logout">Log out</a>
+	    </li>
+    </c:when>
+    <c:otherwise>
+    	   <li class="nav-item">
+	    <a class="nav-link" href="/login">Login</a>
+	    </li>
+    </c:otherwise>
+    </c:choose>
     </ul>
 
     </div>

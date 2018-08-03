@@ -25,8 +25,17 @@
                                 </p>
                             </div>
                             <div class="card-footer">
+                            <c:choose>
+                            <c:when test="${not empty username}">
                                 <a href="/dentist?id=${dentist.userID}#username=${username}" class="btn btn-primary">Appointment</a>
+                               </c:when>
+                               <c:otherwise>
+							     <a href="/login" class="btn btn-primary">Appointment</a>
+                               </c:otherwise>
+                               </c:choose>
+                               
                             </div>
+                           
                         </div>
                     </div>
                 </c:forEach>
