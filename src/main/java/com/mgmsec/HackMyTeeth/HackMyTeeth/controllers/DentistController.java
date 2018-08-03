@@ -57,6 +57,13 @@ public class DentistController {
                 modelAndView.addObject("username",sessions.getUsername());
                 modelAndView.addObject("userID",sessions.getUserID());
                 modelAndView.addObject("denID",id);
+                switch(secSettings.getXssProtection()) {
+	                case Yes:
+	                	modelAndView.addObject("xssProtection","yes");
+	                	break;
+	                default:
+	                	break;
+                }
                 modelAndView.setViewName("dentist");
             }
             else {

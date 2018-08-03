@@ -45,6 +45,7 @@ public class SettingController {
         CookieParam cookieParam = CookieParam.True;
         PwdStorage pwdStorage = PwdStorage.Clear;
         SessFix sessFix = SessFix.Yes;
+        XssProtection xssProtection = XssProtection.No;
         switch (request.getParameter("UseCookie")) {
             case "Base64":
                 useCookie = UseCookie.Base64;
@@ -68,6 +69,14 @@ public class SettingController {
             case "No":
                 sessFix = SessFix.No;
                 break;
+        }
+        switch (request.getParameter("XssProtection")) {
+	        case "Yes":
+	            xssProtection = XssProtection.Yes;
+	            break;
+	        case "No":
+	            xssProtection = XssProtection.No;
+	            break;
         }
         switch (request.getParameter("Sqli")) {
             case "0":
@@ -100,6 +109,7 @@ public class SettingController {
         secSettings.setUseCookie(useCookie);
         secSettings.setSessFix(sessFix);
         secSettings.setPwdStorage(pwdStorage);
+        secSettings.setXssProtection(xssProtection);
         if (sessService.deleteAllSession()) {
             
             if(userService.resetAllPassword()) {

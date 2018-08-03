@@ -15,9 +15,17 @@ public class SecuritySettings {
     private Boolean sqli;
     private ResetPassword resetPassword;
     private PwBruteForce pwBruteForce;
+    private XssProtection xssProtection;
 
+    public XssProtection getXssProtection() {
+		return xssProtection;
+	}
 
-    public void setSqli(Boolean sqli) {
+	public void setXssProtection(XssProtection xssProtection) {
+		this.xssProtection = xssProtection;
+	}
+
+	public void setSqli(Boolean sqli) {
         this.sqli = sqli;
     }
 
