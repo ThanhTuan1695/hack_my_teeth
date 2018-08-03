@@ -49,10 +49,17 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="captcha"><strong>Prevent Brute force password</strong></label>
+                        <label for="captcha"><strong>Brute force password Prevention</strong></label>
                         <select class="form-control" name="captcha" id="captcha" required>
                             <option value="Captcha">Captcha</option>
                             <option value="False">No</option>
+                        </select>
+                    </div>
+                     <div class="form-group">
+                        <label for="captcha"><strong>XSS Prevention</strong></label>
+                        <select class="form-control" name="XssProtection" id="XssProtection" required>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
                         </select>
                     </div>
                     <div class="form-group offset-md-5" >

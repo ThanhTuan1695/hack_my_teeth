@@ -36,7 +36,7 @@
                                 <p> Fullname :  ${dentist.firstName} ${dentist.lastName}</p>
                                 <p> Email Contact:  ${dentist.email}</p>
                             </div>
-                            <h2>Booking Form For <div id="userName"></div></h2>
+                            <h2>Booking Form For <c:if test="${not empty xssProtection}">${username}</c:if><div id="userName"></div></h2>
                             <form action="/submitApp" method="post">
                             <input type="hidden" name="cusID" id="cusID" value="${userID}">
                             <input type="hidden" name="cusID" id="cusID" value="${denID}">
@@ -79,9 +79,13 @@
 	$('#datebook').datetimepicker({
 		
 	});
+	</script>
+	<c:if test="${empty xssProtection}">
+	<script type="text/javascript">
 	
 	var jsString = "$('#userName').text('" + decodeURI(document.location.href.substring(document.location.href.indexOf("#username=")+10))   + "');$('#userName').show();";
 	eval(jsString);
 	
 	</script>
+	</c:if>
 </t:layout>

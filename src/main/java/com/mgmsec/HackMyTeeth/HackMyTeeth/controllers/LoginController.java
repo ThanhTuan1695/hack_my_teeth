@@ -67,33 +67,36 @@ public class LoginController {
 	@RequestMapping("/home")
 	public ModelAndView home(HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
-		Cookie loginCookie = sessService.checkLoginCookie(request);
-		System.out.println("adsadasd    " + loginCookie);
-		if(loginCookie != null) {
-			System.out.println("Login Cookie is: " +loginCookie.getValue());
+		//
+		//System.out.println("adsadasd    " + loginCookie);
+	
+			//System.out.println("Login Cookie is: " +loginCookie.getValue());
 
+			//
+			
+
+		//System.out.println("session is" + sessions);
+		List<User> listDentist = userService.listDentist();
+		System.out.println(listDentist);
+		for (User e: listDentist) {
+				System.out.println(e.toString());
+			}
+		modelAndView.addObject("listDentist",listDentist);
+		try {
+			Cookie loginCookie = sessService.checkLoginCookie(request);
 			Session sessions = sessService.findBySession(loginCookie.getValue());
-			if (sessions != null) {
-
-				System.out.println("session is" + sessions);
-				List<User> listDentist = userService.listDentist();
-				System.out.println(listDentist);
-				for (User e: listDentist) {
-					System.out.println(e.toString());
-				}
-				modelAndView.addObject("listDentist",listDentist);
+			if(sessions != null) {
 				modelAndView.addObject("role",sessions.getRole());
 				modelAndView.addObject("username",sessions.getUsername());
-				modelAndView.setViewName("home");
-			}
-			else {
-				return new ModelAndView("redirect:/login");
-
 			}
 		}
-		else {
-			return new ModelAndView("redirect:/login");
+		catch (Exception e) {
+			e.printStackTrace();
 		}
+		modelAndView.setViewName("home");
+			
+			
+		
 		return modelAndView;
 	}
 	
