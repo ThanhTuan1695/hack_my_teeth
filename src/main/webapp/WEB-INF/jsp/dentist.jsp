@@ -29,6 +29,8 @@
                                 <li>Send a message</li>
                             </ul>
                         </div>
+                        <hr>
+
                         <div class="col-lg-12 text-center">
                             <h2>Doctor : ${dentist.lastName} </h2>
                             <div>
@@ -36,18 +38,38 @@
                                 <p> Fullname :  ${dentist.firstName} ${dentist.lastName}</p>
                                 <p> Email Contact:  ${dentist.email}</p>
                             </div>
-                            <h2>Booking Form For <c:if test="${not empty xssProtection}">${username}</c:if><div id="userName"></div></h2>
-                            <form action="/submitApp" method="post">
-                            <input type="hidden" name="cusID" id="cusID" value="${userID}">
-                            <input type="hidden" name="cusID" id="cusID" value="${denID}">
-                            <label>Date:</label>
-                            <input type="text" name="datebook" id="datebook" value="" class="hasDatepicker">
-                            <br/>
-                            <label>Description:</label>
-                            <input type="text" name="description" id="description">
-                            <br>
-                            <button class="btn btn-primary btn-block" type="submit" style="position:relative;width:30%;height:30%;">Submit</button>
-                            </form>
+                            <div class="clearfix"></div>
+                            <hr>
+                            <div>
+                                <br>
+                                <br>
+                                <h2>Booking Form For: <c:if test="${not empty xssProtection}">${username}</c:if><div id="userName"></div></h2>
+                                <br>
+                                <br>
+                                <div class="col-lg-6 offset-3">
+                                    <form action="/dentist?id=${dentist.userID}" method="post">
+                                        <div class="form-group col-md-12">
+                                            <label for="title" class="col-sm-4"><strong>Title:</strong> </label>
+                                            <input  type="text" name="title" id="title" value="" class="hasDatepicker form-control">
+
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <label for="datebook" class="col-sm-4"><strong>Date:</strong> </label>
+                                            <input  type="text" name="datebook" id="datebook" value="" class="hasDatepicker form-control">
+
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <label for="description" class="col-lg-6"><Strong>Description :</Strong></label>
+                                            <textarea class="form-control" id="description" rows="3"  name="description"></textarea>
+                                        </div>
+                                        <div class="form-group col-md-12 " >
+                                            <button class="btn btn-primary btn-block" type="submit" >Submit</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+
                         </div>
                     </div>
                 </c:otherwise>

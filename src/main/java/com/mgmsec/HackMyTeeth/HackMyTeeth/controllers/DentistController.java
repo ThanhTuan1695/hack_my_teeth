@@ -1,9 +1,12 @@
 package com.mgmsec.HackMyTeeth.HackMyTeeth.controllers;
 
+import com.mgmsec.HackMyTeeth.HackMyTeeth.model.Appointment;
 import com.mgmsec.HackMyTeeth.HackMyTeeth.model.Session;
 import com.mgmsec.HackMyTeeth.HackMyTeeth.model.User;
+import com.mgmsec.HackMyTeeth.HackMyTeeth.service.AppointmentService;
 import com.mgmsec.HackMyTeeth.HackMyTeeth.service.SessionService;
 import com.mgmsec.HackMyTeeth.HackMyTeeth.service.UserService;
+import com.mgmsec.HackMyTeeth.HackMyTeeth.service.XssService;
 import com.mgmsec.HackMyTeeth.HackMyTeeth.setting.SecuritySettings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,6 +29,9 @@ public class DentistController {
     @Autowired
     SessionService sessService;
 
+    @Autowired
+    AppointmentService appointmentService;
+
 //    @Autowired
 //    priate Environment environment;
 
@@ -34,12 +40,13 @@ public class DentistController {
 
     @Value("${security.SQLI}")
     private Boolean sqlinjection;
+    @Autowired
+    XssService xssService;
 
     @RequestMapping(value = "/dentist", method = RequestMethod.GET)
     public ModelAndView dentistPage(HttpServletRequest request, Model model) {
         ModelAndView modelAndView = new ModelAndView();
         Cookie loginCookie = sessService.checkLoginCookie(request);
-        System.out.println("hfhgf      "+secSettings.getSqli());
         if(loginCookie != null) {
             System.out.println("Login Cookie is: in dentist " +loginCookie.getValue());
 
@@ -57,13 +64,7 @@ public class DentistController {
                 modelAndView.addObject("username",sessions.getUsername());
                 modelAndView.addObject("userID",sessions.getUserID());
                 modelAndView.addObject("denID",id);
-                switch(secSettings.getXssProtection()) {
-	                case Yes:
-	                	modelAndView.addObject("xssProtection","yes");
-	                	break;
-	                default:
-	                	break;
-                }
+
                 modelAndView.setViewName("dentist");
             }
             else {
@@ -75,6 +76,43 @@ public class DentistController {
         }
 
         return modelAndView;
+    }
+    @RequestMapping(value = "/dentist", method = RequestMethod.POST)
+    public ModelAndView bookingDentist (HttpServletRequest request, Model model){
+        ModelAndView modelAndView = new ModelAndView();
+        String title = request.getParameter("title");
+        String date = request.getParameter("datebook");
+        String des  = request.getParameter("description");
+        switch(secSettings.getXssProtection()) {
+            case Yes:
+                title = xssService.escapeHtml(title);
+                des = xssService.escapeHtml(des);
+                break;
+            default:
+                break;
+        }
+        System.out.println("--------------: " + des);
+        Cookie loginCookie = sessService.checkLoginCookie(request);
+        Session sessions = sessService.findBySession(loginCookie.getValue());
+        int denId  = Integer.parseInt(request.getParameter("id"));
+        Appointment appointment = new Appointment();
+        appointment.setTitle(title);
+        appointment.setTime(date);
+        appointment.setDescription(des);
+        appointment.setCusID((int) sessions.getUserID());
+        appointment.setDenID(denId);
+        boolean result = appointmentService.insertAppointment(appointment);
+        System.out.println("---------------");
+        System.out.println(result);
+        System.out.println(appointment.toString());
+        System.out.println("---------------");
+
+        if (!result) {
+            modelAndView.addObject("errormsg", "Can not booking");
+            return modelAndView;
+        }
+        return new ModelAndView("redirect:/home");
+
     }
 
 }
