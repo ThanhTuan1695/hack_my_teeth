@@ -4,4 +4,5 @@ import java.util.List;
 
 public interface AppointmentService {
 	List<Appointment> findAll(String username);
+	Boolean insertAppointment(Appointment appointment);
 }
