@@ -33,11 +33,17 @@ public class UserServiceImpl implements UserService {
 	public String findByUsername(String username,String password) {
 		return userRepository.findByUsername(username,password);
 	}
+	
 	@Override
 	public List<User> listDentist (){
 		return userRepository.listDentist();
 	}
 
+	@Override
+	public List<User> searchDentist(String key){
+		return userRepository.searchDentist(key);
+	}
+	
 	@Override
 	public List<User> findByUser(String username, String password) {
 		// TODO Auto-generated method stub

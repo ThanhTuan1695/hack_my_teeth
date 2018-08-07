@@ -50,6 +50,21 @@ public class UserRepository {
         return null;
     }
 
+    public List<User> searchDentist(String key) {
+        try {
+        	if(!key.equals("")) {
+        		List<User> result = jdbcTemplate.query("select * from user  where role = 1 AND (firstName='"+key+"' OR lastName='"+key+"')", (rs, rowNum) -> new User(rs.getLong("userID"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("email"), rs.getString("username"), rs.getString("password"), rs.getString("role"),rs.getString("salt")));
+        		return result;
+        	}else {
+                List<User> result = jdbcTemplate.query("select * from user  where role = 1", (rs, rowNum) -> new User(rs.getLong("userID"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("email"), rs.getString("username"), rs.getString("password"), rs.getString("role"),rs.getString("salt")));	
+                return result;
+        	}
+        	
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     public String findByUsername(String username, String password) {
 

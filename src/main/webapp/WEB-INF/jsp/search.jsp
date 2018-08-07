@@ -2,15 +2,20 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="java.util.List" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
-<%@ page session="false" %>
+<%@ page session="false" %> 
 
 <t:layout>
     <div class="container">
-	
-        <h1 class="my-4">Welcome to Dentist Booking</h1>
-
+		<div class="message" style="background-color:#AFEEEE;height: 70px;margin-top:30px;padding-top:15px;padding-left: 20px;" >
+		
+        You search for ${keyword}
+       
+      
+	</div>
+	<p></p>
+	<div>
         <!-- Marketing Icons Section -->
-        <h3 class="my-4">All Dentist:  </h3>
+        <h3 class="my-4">Search Results:  </h3>
         <div class="row">
             <c:if test="${listDentist.size() > 0}">
                 <c:forEach items="${listDentist}" var="dentist">
@@ -68,6 +73,7 @@
                 </ul>
             </div>
 
+        </div>
         </div>
     </div>
     

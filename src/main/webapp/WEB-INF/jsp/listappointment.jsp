@@ -6,9 +6,9 @@
 
     <t:layout>
     <div class="container">
-	
-        <h1 class="my-4">List of Appointments</h1>
-
+		
+        <h3 class="my-4">List of Appointments</h3>
+		
         <!-- Marketing Icons Section -->
         <h3 class="my-4">All Appointments:  </h3>
         <div class="row">
