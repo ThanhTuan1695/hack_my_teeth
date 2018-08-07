@@ -22,7 +22,7 @@
                                     <span><strong>Booked by:</strong> ${appointment.cusName}</span><br>
                                     <span><strong>Title:</strong> ${appointment.title}</span><br>
                                     <span><strong>Date time:</strong> ${appointment.time}</span>
-                                    <span><strong>Description:</strong> ${appointment.description}</span>
+                                    <span id="imgxss"><strong>Description:</strong> ${appointment.description}</span>
                                 </p>
                             </div>
                             <div class="card-footer">

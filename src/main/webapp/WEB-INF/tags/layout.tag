@@ -90,16 +90,6 @@
     </div>
     <!-- /.container -->
     </footer>
-
-<<<<<<< HEAD
-    <!-- Bootstrap core JavaScript -->
-    <script src="/static/vendor/jquery/jquery.min.js"></script>
-    <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="https://unpkg.com/ionicons@4.3.0/dist/ionicons.js"></script>
-=======
-   
-
->>>>>>> cc5c7a3f983015f34217af3e210b5bba92c9fd2f
     </body>
 
     </html>
