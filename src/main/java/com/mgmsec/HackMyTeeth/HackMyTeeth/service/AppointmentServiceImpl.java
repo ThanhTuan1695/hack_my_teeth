@@ -18,4 +18,9 @@ public class AppointmentServiceImpl implements AppointmentService {
 		return app;
 	
 	}
+
+	@Override
+	public Boolean insertAppointment(Appointment appointment) {
+		return appointmentRepository.addAppointment(appointment);
+	}
 }

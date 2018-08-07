@@ -9,4 +9,5 @@ public class SecurityEnum {
 	public static Boolean Sqli;
 	public static enum ResetPassword { True, False };
 	public static enum PwBruteForce { Captcha, Userlockout, False };
+	public static enum XssProtection { Yes, No}
 }

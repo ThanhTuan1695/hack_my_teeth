@@ -13,7 +13,6 @@ import java.util.List;
 public class AppointmentRepository {
 	@Autowired
 	    private JdbcTemplate jdbcTemplate;
-	    private EntityManager manager; 
 	    public List<Appointment> findAll(String username){
 	    	try {
 	    		List<Appointment> result = jdbcTemplate.query("SELECT a.appID,a.title,a.time, CONCAT(u.firstName,' ',u.lastName) as cusName,CONCAT(ut.firstName,' ',ut.lastName) as denName,a.description FROM appointment a JOIN user u JOIN user ut ON a.cusID = u.userID AND a.denID = ut.userID AND a.denID= (SELECT userID FROM user WHERE username='"+username+"')", 
@@ -26,4 +25,15 @@ public class AppointmentRepository {
 	    		return null;
 	    	}
 	    }
+	    public Boolean addAppointment(Appointment appointment){
+	    	try{
+
+	    		String sql  = "INSERT INTO appointment values(?,?,?,?,?,?)";
+				jdbcTemplate.update(sql, null, appointment.getTitle(),appointment.getTime(), appointment.getDescription(), appointment.getCusID(), appointment.getDenID());
+			} catch (Exception e){
+	    		e.printStackTrace();
+	    		return false;
+			}
+	    	return true;
+		}
 }

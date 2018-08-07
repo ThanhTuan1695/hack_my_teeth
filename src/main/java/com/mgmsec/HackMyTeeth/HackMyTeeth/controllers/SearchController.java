@@ -39,6 +39,13 @@ public class SearchController {
 				for (User e: listDentist) {
 					System.out.println(e.toString());
 				}
+				switch (secSettings.getXssProtection()) {
+				case Yes:
+					modelAndView.addObject("xssProtection", "Yes");				
+					break;
+				default:
+					break;
+			}
 				modelAndView.addObject("listDentist",listDentist);
 				if (key == null || key.length() == 0) {
 					String all ="all dentists";

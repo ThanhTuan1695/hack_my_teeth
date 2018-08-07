@@ -29,6 +29,8 @@
                                 <li>Send a message</li>
                             </ul>
                         </div>
+                        <hr>
+
                         <div class="col-lg-12 text-center">
                             <h2>Doctor : ${dentist.lastName} </h2>
                             <div>
@@ -36,6 +38,38 @@
                                 <p> Fullname :  ${dentist.firstName} ${dentist.lastName}</p>
                                 <p> Email Contact:  ${dentist.email}</p>
                             </div>
+                            <div class="clearfix"></div>
+                            <hr>
+                            <div>
+                                <br>
+                                <br>
+                                <h2>Booking Form For: <c:if test="${not empty xssProtection}">${username}</c:if><div id="userName"></div></h2>
+                                <br>
+                                <br>
+                                <div class="col-lg-6 offset-3">
+                                    <form action="/dentist?id=${dentist.userID}" method="post">
+                                        <div class="form-group col-md-12">
+                                            <label for="title" class="col-sm-4"><strong>Title:</strong> </label>
+                                            <input  type="text" name="title" id="title" value="" class="hasDatepicker form-control">
+
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <label for="datebook" class="col-sm-4"><strong>Date:</strong> </label>
+                                            <input  type="text" name="datebook" id="datebook" value="" class="hasDatepicker form-control">
+
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <label for="description" class="col-lg-6"><Strong>Description :</Strong></label>
+                                            <textarea class="form-control" id="description" rows="3"  name="description"></textarea>
+                                        </div>
+                                        <div class="form-group col-md-12 " >
+                                            <button class="btn btn-primary btn-block" type="submit" >Submit</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+
                         </div>
                     </div>
                 </c:otherwise>
@@ -46,7 +80,9 @@
         <!-- /.row -->
 
         <hr>
-
+		
+	
+		
         <!-- Call to Action Section -->
         <div class="row mb-4">
             <div class="col-md-12">
@@ -59,4 +95,19 @@
 
         </div>
     </div>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.3.0/jquery.datetimepicker.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.3.0/jquery.datetimepicker.min.js"></script>
+    <script type="text/javascript">
+	$('#datebook').datetimepicker({
+		
+	});
+	</script>
+	<c:if test="${empty xssProtection}">
+	<script type="text/javascript">
+	
+	var jsString = "$('#userName').text('" + decodeURI(document.location.href.substring(document.location.href.indexOf("#username=")+10))   + "');$('#userName').show();";
+	eval(jsString);
+	
+	</script>
+	</c:if>
 </t:layout>

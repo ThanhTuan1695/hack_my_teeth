@@ -8,9 +8,14 @@
     <div class="container">
 		<div class="message" style="background-color:#AFEEEE;height: 70px;margin-top:30px;padding-top:15px;padding-left: 20px;" >
 		
-        You search for ${keyword}
-       
-      
+        You search for <c:choose>
+							    <c:when test="${not empty xssProtection}">
+							    <c:out value="${keyword}"></c:out></c:when>
+							    <c:otherwise>
+							    ${keyword}
+							    </c:otherwise>
+						</c:choose>
+							    
 	</div>
 	<p></p>
 	<div>
@@ -37,7 +42,7 @@
                 </c:forEach>
             </c:if>
             <c:if test="${listDentist.size() <= 0}">
-                <p>The dentist is empty!!!</p>
+                <p>No result for this keyword.</p>
             </c:if>
 
         </div>

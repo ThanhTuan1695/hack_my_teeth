@@ -4,6 +4,8 @@ public class Appointment {
 	private int appID;
 	private String title;
 	private String time;
+	private int cusID;
+	private int denID;
 	private String cusName;
 	private String denName;
 	private String description;
@@ -57,5 +59,27 @@ public class Appointment {
 		return "Appointment [appID=" + appID + ", title=" + title + ", time=" + time + ", cusName=" + cusName + ", denName="
 				+ denName + ", description=" + description + "]";
 	}
-	
+
+	public int getCusID() {
+		return cusID;
+	}
+
+	public void setCusID(int cusID) {
+		this.cusID = cusID;
+	}
+
+	public int getDenID() {
+		return denID;
+	}
+
+	public void setDenID(int denID) {
+		this.denID = denID;
+	}
+
+	public void setDenName(String denName) {
+		this.denName = denName;
+	}
+
+	public Appointment() {
+	}
 }
