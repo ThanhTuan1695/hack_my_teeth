@@ -29,7 +29,17 @@ public class SearchController {
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public ModelAndView search(HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
-		
+		try {
+			Cookie loginCookie = sessService.checkLoginCookie(request);
+			Session sessions = sessService.findBySession(loginCookie.getValue());
+			if(sessions != null) {
+				modelAndView.addObject("role",sessions.getRole());
+				modelAndView.addObject("username",sessions.getUsername());
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 				String key=request.getParameter("keywords");
 				if (key == null || key.length() == 0) {
 					key = "";
