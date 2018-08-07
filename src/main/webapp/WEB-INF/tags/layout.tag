@@ -13,6 +13,7 @@
 
     <title>Modern Business - Start Bootstrap Template</title>
     <!-- Bootstrap core CSS -->
+    
     <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     
       <!-- Bootstrap core JavaScript -->
@@ -37,8 +38,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
     <ul class="navbar-nav ml-auto">
-    <form class="form-inline my-2 my-lg-0">
-    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <form class="form-inline my-2 my-lg-0" action="/search" method="get">
+    <input class="form-control mr-sm-2" type="text" placeholder="Search" name="keywords" aria-label="Search">
+    <div class"input-btn"><button id="submit" type="submit"><ion-icon name="search"></ion-icon></button></div> 
     </form>
     <li class="nav-item">
     <a class="nav-link" href="/home">Home</a>
@@ -89,8 +91,15 @@
     <!-- /.container -->
     </footer>
 
+<<<<<<< HEAD
+    <!-- Bootstrap core JavaScript -->
+    <script src="/static/vendor/jquery/jquery.min.js"></script>
+    <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/ionicons@4.3.0/dist/ionicons.js"></script>
+=======
    
 
+>>>>>>> cc5c7a3f983015f34217af3e210b5bba92c9fd2f
     </body>
 
     </html>

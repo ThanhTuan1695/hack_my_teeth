@@ -2,15 +2,25 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="java.util.List" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
-<%@ page session="false" %>
+<%@ page session="false" %> 
 
 <t:layout>
     <div class="container">
-	
-        <h1 class="my-4">Welcome to Dentist Booking</h1>
-
+		<div class="message" style="background-color:#AFEEEE;height: 70px;margin-top:30px;padding-top:15px;padding-left: 20px;" >
+		
+        You search for <c:choose>
+							    <c:when test="${not empty xssProtection}">
+							    <c:out value="${keyword}"></c:out></c:when>
+							    <c:otherwise>
+							    ${keyword}
+							    </c:otherwise>
+						</c:choose>
+							    
+	</div>
+	<p></p>
+	<div>
         <!-- Marketing Icons Section -->
-        <h3 class="my-4">All Dentist:  </h3>
+        <h3 class="my-4">Search Results:  </h3>
         <div class="row">
             <c:if test="${listDentist.size() > 0}">
                 <c:forEach items="${listDentist}" var="dentist">
@@ -25,7 +35,7 @@
                                 </p>
                             </div>
                             <div class="card-footer">
-                            <c:choose>
+                                <c:choose>
                             <c:when test="${not empty username}">
                                 <a href="/dentist?id=${dentist.userID}#username=${username}" class="btn btn-primary">Appointment</a>
                                </c:when>
@@ -33,15 +43,13 @@
 							     <a href="/login" class="btn btn-primary">Appointment</a>
                                </c:otherwise>
                                </c:choose>
-                               
                             </div>
-                           
                         </div>
                     </div>
                 </c:forEach>
             </c:if>
             <c:if test="${listDentist.size() <= 0}">
-                <p>The dentist is empty!!!</p>
+                <p>No result for this keyword.</p>
             </c:if>
 
         </div>
@@ -77,6 +85,7 @@
                 </ul>
             </div>
 
+        </div>
         </div>
     </div>
     
