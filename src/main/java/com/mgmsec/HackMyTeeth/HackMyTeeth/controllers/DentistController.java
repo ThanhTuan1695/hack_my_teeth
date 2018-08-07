@@ -83,10 +83,12 @@ public class DentistController {
         String title = request.getParameter("title");
         String date = request.getParameter("datebook");
         String des  = request.getParameter("description");
+
         switch(secSettings.getXssProtection()) {
             case Yes:
-                title = xssService.escapeHtml(title);
-                des = xssService.escapeHtml(des);
+//                title = xssService.escapeHtml(title);
+//                des = xssService.escapeHtml(des);
+                des = xssService.escapeJS(des);
                 break;
             default:
                 break;
