@@ -85,7 +85,7 @@
 			</c:when>
 			<c:otherwise>
 					<script>
-					var alertText = "Latest Booking: " + ${lastBooking};
+					var alertText = "Latest Booking: " + "${lastBooking}";
 					alert(alertText);
 				</script>
 			</c:otherwise>
