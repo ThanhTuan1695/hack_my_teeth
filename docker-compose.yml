@@ -4,7 +4,6 @@ services:
 
   db:
     container_name: hackteeth_db
-    restart: always
     environment:
       MYSQL_USER: root
       MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
