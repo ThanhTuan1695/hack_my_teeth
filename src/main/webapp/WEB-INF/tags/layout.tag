@@ -13,13 +13,14 @@
 
     <title>Modern Business - Start Bootstrap Template</title>
     <!-- Bootstrap core CSS -->
+    
     <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     
       <!-- Bootstrap core JavaScript -->
     <script src="/static/vendor/jquery/jquery.min.js"></script>
     <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-     
+	
+	
    
     <!-- Custom styles for this template -->
     <link href="/static/css/modern-business.css" rel="stylesheet">
@@ -37,8 +38,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
     <ul class="navbar-nav ml-auto">
-    <form class="form-inline my-2 my-lg-0">
-    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <form class="form-inline my-2 my-lg-0" action="/search" method="get">
+    <input class="form-control mr-sm-2" type="text" placeholder="Search" name="keywords" aria-label="Search">
+    <div class"input-btn"><button id="submit" type="submit"><ion-icon name="search"></ion-icon></button></div> 
     </form>
     <li class="nav-item">
     <a class="nav-link" href="/home">Home</a>
@@ -89,7 +91,6 @@
     <!-- /.container -->
     </footer>
 
-   
 
     </body>
 

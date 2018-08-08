@@ -107,7 +107,6 @@ public class LoginController {
 		if(loginCookie != null) {
 			
 			System.out.println("Login Cookie is: " +loginCookie.getValue());
-			
 			Session sessions = sessService.findBySession(loginCookie.getValue());
 			if (sessions != null) {
 				System.out.println("session is" + sessions);
@@ -117,6 +116,15 @@ public class LoginController {
 					for (Appointment e: listapp) {
 						System.out.println(e.toString());
 					}
+					switch(secSettings.getXssProtection()) {
+		            case Yes:
+		            	modelAndView.addObject("xssProtection","Prevention");
+		                break;
+		            default:
+		                break;
+		        }
+					modelAndView.addObject("lastBooking",listapp.get(listapp.size()-1).getDescription());
+					System.out.println(listapp.get(listapp.size()-1).getDescription());
 					modelAndView.addObject("listapp",listapp);
 					modelAndView.addObject("role",sessions.getRole());
 					modelAndView.addObject("username",sessions.getUsername());

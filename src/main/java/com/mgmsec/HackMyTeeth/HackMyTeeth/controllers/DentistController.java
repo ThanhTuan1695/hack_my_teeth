@@ -40,8 +40,7 @@ public class DentistController {
 
     @Value("${security.SQLI}")
     private Boolean sqlinjection;
-    @Autowired
-    XssService xssService;
+
 
     @RequestMapping(value = "/dentist", method = RequestMethod.GET)
     public ModelAndView dentistPage(HttpServletRequest request, Model model) {
@@ -83,14 +82,7 @@ public class DentistController {
         String title = request.getParameter("title");
         String date = request.getParameter("datebook");
         String des  = request.getParameter("description");
-        switch(secSettings.getXssProtection()) {
-            case Yes:
-                title = xssService.escapeHtml(title);
-                des = xssService.escapeHtml(des);
-                break;
-            default:
-                break;
-        }
+        
         System.out.println("--------------: " + des);
         Cookie loginCookie = sessService.checkLoginCookie(request);
         Session sessions = sessService.findBySession(loginCookie.getValue());

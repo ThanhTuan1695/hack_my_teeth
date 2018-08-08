@@ -9,5 +9,6 @@ public interface UserService {
 	User getDentistById(String id, Boolean sqli);
 	List<User> findByUser(String username,String password);
 	boolean resetAllPassword();
+	public List<User> searchDentist(String key);
 	
 }
