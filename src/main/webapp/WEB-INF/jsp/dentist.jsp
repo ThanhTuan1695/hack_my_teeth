@@ -43,7 +43,7 @@
                             <div>
                                 <br>
                                 <br>
-                                <h2>Booking Form For: <c:if test="${not empty xssProtection}">${username}</c:if><div id="userName"></div></h2>
+                                <h2>Booking Form For:<c:if test="${not empty xssProtection}"><c:out value="${username}"/></c:if><div id="userName"></div></h2>
                                 <br>
                                 <br>
                                 <div class="col-lg-6 offset-3">
