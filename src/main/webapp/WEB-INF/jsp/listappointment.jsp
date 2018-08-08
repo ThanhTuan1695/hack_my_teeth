@@ -20,6 +20,7 @@
                             <h4 class="card-header">Dentist: ${appointment.denName}</h4>
                             <div class="card-body">
                                 <p class="card-text">
+
                                 <c:choose>
                                 	<c:when test="${not empty xssProtection }">
 	                                    <span><strong>Booked by:</strong> ${appointment.cusName}</span><br>
@@ -39,6 +40,7 @@
 	                                    </span>
                                     </c:otherwise>
                                    </c:choose>
+
                                 </p>
                             </div>
                             <div class="card-footer">
