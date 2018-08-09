@@ -102,5 +102,23 @@ public class UserServiceImpl implements UserService {
 		return true;
 	}
 
+	@Override
+	public boolean changePassword(int id, String password,String username) {
+		switch (securitySettings.getPwdStorage()) {
+		case PBKDF:
+			String salt = userRepository.getSalt(username);
+			if (salt == null)
+				return false;
+			else {
+				password = passwordService.pbkdf2(password, salt);
+			}
+			break;
+		default:
+			break;
+		}
+		// TODO Auto-generated method stub
+		return userRepository.changePassword(id, password);
+	}
+
 		
 }
