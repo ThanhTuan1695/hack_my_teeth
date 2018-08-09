@@ -141,7 +141,16 @@ public class UserRepository {
     	}
     	return null;
     }
-	
+	public boolean changePassword(int id,String password) {
+		try {
+			jdbcTemplate.update("UPDATE user SET password = ? WHERE userID = ?",password,id);
+			return true;
+		}catch(Exception e) {
+			e.printStackTrace();
+			
+		}
+		return false;
+	}
     public void updateAllSaltColumn(List<String> salts) {
 		try {
 			int id = 1; 
