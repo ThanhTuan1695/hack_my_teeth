@@ -79,7 +79,7 @@
 		<c:choose>
 			<c:when test="${not empty xssProtection}">
 				<script>
-					var alertText = "Latest Booking: " + ${m:escapeJS(lastBooking)};
+					var alertText = "Latest Booking: " + "${m:escapeJS(lastBooking)}";
 					alert(alertText);
 				</script>
 			</c:when>
