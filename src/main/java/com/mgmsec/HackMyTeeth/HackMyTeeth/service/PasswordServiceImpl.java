@@ -2,11 +2,15 @@ package com.mgmsec.HackMyTeeth.HackMyTeeth.service;
 
 import java.security.SecureRandom;
 
+
 import java.security.spec.InvalidKeySpecException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.security.MessageDigest;
+
+import java.util.Locale;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,12 +21,25 @@ import javax.crypto.spec.PBEKeySpec;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
-
+import com.mgmsec.HackMyTeeth.HackMyTeeth.service.RandomNumberGenerator;
 @Service
 public class PasswordServiceImpl implements PasswordService{
 	@Autowired
 	private SessionService sessService;
 	//for pbkdf later
+	
+    public RandomNumberGenerator random;
+
+    public char[] symbols;
+
+    public char[] buf;
+    
+	 public String nextString() {
+	        for (int idx = 0; idx < buf.length; ++idx)
+	            buf[idx] = symbols[random.next(16) % symbols.length];
+	        return new String(buf);
+	    }
+	 
 	public String getRandomString(int length) {
 		
 		try {

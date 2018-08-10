@@ -2,6 +2,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="java.util.List" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+    <%@ page session="false" %>
+
 <t:layout>
     <div class="container">
 
@@ -20,7 +22,7 @@
                             <hr>
                             <div>
                                 <div class="col-lg-6 offset-3">
-                                    <form action="/changePassword" method="get">
+                                    <form action="/changePassword" method="POST">
                                         <div class="form-group col-md-12">
                                             <label for="title" class="col-sm-4"><strong>New password:</strong> </label>
                                             <input  type="password" name="password" id="password" value="" class="hasDatepicker form-control">
