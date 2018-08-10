@@ -16,13 +16,14 @@ public class CSRF implements HandlerInterceptor{
 	@Autowired
 	private PasswordService passwordService;
 	
-	public HttpSession httpSession;
+	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		if ("GET".equals(request.getMethod())) {
-			httpSession = request.getSession();
+			HttpSession httpSession = request.getSession();
 			System.out.println("adsafad:" +httpSession);
 			String _csrf = (String) httpSession.getAttribute("_csrf");
+	
 			// Create csrf token
 			if (_csrf == null || _csrf.isEmpty()) {
 				_csrf = passwordService.getRandomString(16);
@@ -32,6 +33,7 @@ public class CSRF implements HandlerInterceptor{
 			}
 			System.out.println("add csrf token");
 			request.setAttribute("_csrfToken", _csrf);
+
 		}
 		return true;
 	}

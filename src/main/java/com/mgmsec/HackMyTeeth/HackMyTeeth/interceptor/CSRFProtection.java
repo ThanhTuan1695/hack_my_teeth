@@ -16,8 +16,8 @@ public class CSRFProtection implements HandlerInterceptor{
 
 		// Check csrf token
 		if (request.getMethod().matches("POST|PUT|PATCH|DELETE")) {
-			csrf1.httpSession = request.getSession();
-			String _csrf = (String) csrf1.httpSession.getAttribute("_csrf");
+			HttpSession httpSession = request.getSession();
+			String _csrf = (String) httpSession.getAttribute("_csrf");
 			String _csrfParam = null;
 			if ("application/json".equals(request.getContentType())) {
 				System.out.println(request.getContentType());
@@ -26,7 +26,7 @@ public class CSRFProtection implements HandlerInterceptor{
 			} else {
 				_csrfParam = request.getParameter("_csrf");
 			}
-			System.out.println("Session:"+ csrf1.httpSession + "_csrf:" + _csrf + "_csrfToken:" + _csrfParam);
+			System.out.println("Session:"+ httpSession + "_csrf:" + _csrf + "_csrfToken:" + _csrfParam);
 			if (_csrfParam == null || _csrf.equals(_csrfParam) == false) {
 				response.sendError(401);
 				return false;
