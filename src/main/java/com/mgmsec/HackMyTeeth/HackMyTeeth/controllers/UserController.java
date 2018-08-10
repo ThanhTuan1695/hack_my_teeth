@@ -56,7 +56,7 @@ public class UserController {
 			modelAndView.setViewName("password");
 			return modelAndView;
 		}
-		@RequestMapping(value="/changePassword",method = RequestMethod.GET)
+		@RequestMapping(value="/changePassword",method = RequestMethod.POST)
 		public ModelAndView changeRequest(Model model, HttpServletRequest request) {
 			ModelAndView modelAndView = new ModelAndView();
 			Cookie loginCookie = sessService.checkLoginCookie(request);

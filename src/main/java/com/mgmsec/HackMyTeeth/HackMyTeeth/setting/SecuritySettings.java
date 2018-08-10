@@ -16,7 +16,16 @@ public class SecuritySettings {
     private ResetPassword resetPassword;
     private PwBruteForce pwBruteForce;
     private XssProtection xssProtection;
+    private Boolean csrf;
+    
+	public Boolean getCsrf() {
+		return csrf;
+	}
 
+	public void setCsrf(Boolean csrf) {
+		this.csrf = csrf;
+	}
+	
     public XssProtection getXssProtection() {
 		return xssProtection;
 	}

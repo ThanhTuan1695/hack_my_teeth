@@ -20,7 +20,7 @@
                             <hr>
                             <div>
                                 <div class="col-lg-6 offset-3">
-                                    <form action="/changePassword" method="get">
+                                    <form action="/changePassword" method="POST">
                                         <div class="form-group col-md-12">
                                             <label for="title" class="col-sm-4"><strong>New password:</strong> </label>
                                             <input  type="password" name="password" id="password" value="" class="hasDatepicker form-control">
@@ -29,7 +29,7 @@
                                             <label for="title" class="col-sm-4"><strong>Repeat:</strong> </label>
                                             <input  type="password" name="password1" id="password1" value="" class="hasDatepicker form-control">
                                         </div>
-                                        <input type="hidden" name="_csrf" value="${_csrfToken}" />
+                                        <input type="hidden" name="_csrf" value="${_csrf}" />
                                         <div class="form-group col-md-12 " >
                                             <button class="btn btn-primary btn-block" type="submit" >Submit</button>
                                         </div>
