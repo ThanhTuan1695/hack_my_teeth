@@ -8,9 +8,6 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import com.mgmsec.HackMyTeeth.HackMyTeeth.interceptor.CSRF;
 import com.mgmsec.HackMyTeeth.HackMyTeeth.service.PasswordService;
 public class CSRFProtection implements HandlerInterceptor{
-	@Autowired
-	private CSRF csrf1;
-	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 

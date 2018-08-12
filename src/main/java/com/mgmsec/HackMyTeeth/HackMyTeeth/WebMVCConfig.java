@@ -1,5 +1,6 @@
 package com.mgmsec.HackMyTeeth.HackMyTeeth;
 
+import com.mgmsec.HackMyTeeth.HackMyTeeth.setting.SecurityEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,7 +28,7 @@ public class WebMVCConfig implements WebMvcConfigurer{
 
 	@Override	
 	public void addInterceptors(InterceptorRegistry registry) {
-		if (true) {
+		if (securitySetting.getCsrfProtection().equals(SecurityEnum.CsrfProtection.Yes)) {
 			// Register CSRF interceptor to generate CSRF token
 			registry.addInterceptor(getCSRF()).addPathPatterns("/password","/changePassword");
 			// Register CSRF prevention interceptor to check CSRF token
