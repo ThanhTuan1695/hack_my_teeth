@@ -106,8 +106,11 @@ public class SettingController {
                 break;
         }
         switch (request.getParameter("csrfPrevention")) {
-            case "Yes":
-                secSettings.setCsrfProtection(CsrfProtection.Yes);
+            case "Token":
+                secSettings.setCsrfProtection(CsrfProtection.Token);
+                break;
+            case "SameSite":
+                secSettings.setCsrfProtection(CsrfProtection.SameSite);
                 break;
             default:
                 secSettings.setCsrfProtection(CsrfProtection.No);

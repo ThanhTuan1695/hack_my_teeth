@@ -65,7 +65,8 @@
                     <div class="form-group">
                         <label for="captcha"><strong>CSRF Prevention</strong></label>
                         <select class="form-control" name="csrfPrevention" id="csrfPrevention" required>
-                            <option value="Yes">Yes</option>
+                            <option value="Token">Token</option>
+							<option value="SameSite">SameSite</option>
                             <option value="No">No</option>
                         </select>
                     </div>

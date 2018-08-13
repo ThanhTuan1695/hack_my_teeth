@@ -220,7 +220,7 @@ public class LoginController {
 		}
 
 		switch(secSettings.getCsrfProtection()) {
-			case Yes:
+			case SameSite:
 				response.setHeader("Set-Cookie", "SESSIONCOOKIE="+sessionid+"; HttpOnly; SameSite=strict");
 				break;
 			default:
