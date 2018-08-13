@@ -66,16 +66,8 @@ public class LoginController {
 	}
 	@RequestMapping("/home")
 	public ModelAndView home(HttpServletRequest request) {
+		System.out.println(secSettings.getCsrfProtection()+"))))))))))))))))");
 		ModelAndView modelAndView = new ModelAndView();
-		//
-		//System.out.println("adsadasd    " + loginCookie);
-	
-			//System.out.println("Login Cookie is: " +loginCookie.getValue());
-
-			//
-			
-
-		//System.out.println("session is" + sessions);
 		List<User> listDentist = userService.listDentist();
 		System.out.println(listDentist);
 		for (User e: listDentist) {
@@ -94,9 +86,7 @@ public class LoginController {
 			e.printStackTrace();
 		}
 		modelAndView.setViewName("home");
-			
-			
-		
+
 		return modelAndView;
 	}
 	
@@ -228,8 +218,16 @@ public class LoginController {
 			case False:
 				break;
 		}
-		response.addCookie(loginCookie);
-		
+
+		switch(secSettings.getCsrfProtection()) {
+			case Yes:
+				response.setHeader("Set-Cookie", "SESSIONCOOKIE="+sessionid+"; HttpOnly; SameSite=strict");
+				break;
+			default:
+				response.addCookie(loginCookie);
+				break;
+		}
+
 	}
 	@RequestMapping(value = "/loginVal", method = RequestMethod.POST)
 	public ModelAndView login(HttpServletRequest request) {

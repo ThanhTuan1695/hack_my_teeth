@@ -82,7 +82,6 @@ public class DentistController {
         String title = request.getParameter("title");
         String date = request.getParameter("datebook");
         String des  = request.getParameter("description");
-        
         System.out.println("--------------: " + des);
         Cookie loginCookie = sessService.checkLoginCookie(request);
         Session sessions = sessService.findBySession(loginCookie.getValue());

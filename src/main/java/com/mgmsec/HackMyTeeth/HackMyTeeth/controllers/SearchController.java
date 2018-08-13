@@ -40,27 +40,32 @@ public class SearchController {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
+		switch (secSettings.getXssProtection()) {
+		case Yes:
+			modelAndView.addObject("xssProtection", "Yes");				
+			break;
+		default:
+			break;
+	}
 				String key=request.getParameter("keywords");
 				if (key == null || key.length() == 0) {
 					key = "";
 			    }
+
 				List<User> listDentist = userService.searchDentist(key);
 				System.out.println(listDentist);
 				for (User e: listDentist) {
 					System.out.println(e.toString());
 				}
-				switch (secSettings.getXssProtection()) {
-				case Yes:
-					modelAndView.addObject("xssProtection", "Yes");				
-					break;
-				default:
-					break;
-			}
+				
+				
 				modelAndView.addObject("listDentist",listDentist);
+				System.out.println("12345");
 				if (key == null || key.length() == 0) {
 					String all ="all dentists";
 					modelAndView.addObject("keyword",all);
 				}
+				System.out.println("678910");
 				modelAndView.addObject("keyword",key);
 				modelAndView.setViewName("search");
 				return modelAndView;

@@ -105,6 +105,14 @@ public class SettingController {
                 secSettings.setPwBruteForce(PwBruteForce.False);
                 break;
         }
+        switch (request.getParameter("csrfPrevention")) {
+            case "Yes":
+                secSettings.setCsrfProtection(CsrfProtection.Yes);
+                break;
+            default:
+                secSettings.setCsrfProtection(CsrfProtection.No);
+                break;
+        }
         secSettings.setCookParam(cookieParam);
         secSettings.setUseCookie(useCookie);
         secSettings.setSessFix(sessFix);
