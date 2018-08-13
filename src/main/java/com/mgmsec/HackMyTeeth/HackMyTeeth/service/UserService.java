@@ -10,5 +10,6 @@ public interface UserService {
 	List<User> findByUser(String username,String password);
 	boolean resetAllPassword();
 	public List<User> searchDentist(String key);
+	boolean changePassword(int id, String password,String username);
 	
 }
