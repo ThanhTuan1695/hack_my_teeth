@@ -10,5 +10,5 @@ public class SecurityEnum {
 	public static enum ResetPassword { True, False };
 	public static enum PwBruteForce { Captcha, Userlockout, False };
 	public static enum XssProtection { Yes, No}
-	public static enum CsrfProtection { Yes, No}
+	public static enum CsrfProtection { SameSite,Token, No}
 }

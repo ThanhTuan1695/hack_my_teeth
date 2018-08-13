@@ -28,11 +28,11 @@ public class WebMVCConfig implements WebMvcConfigurer{
 
 	@Override	
 	public void addInterceptors(InterceptorRegistry registry) {
-		if (securitySetting.getCsrfProtection().equals(SecurityEnum.CsrfProtection.Yes)) {
+		
 			// Register CSRF interceptor to generate CSRF token
 			registry.addInterceptor(getCSRF()).addPathPatterns("/password","/changePassword");
 			// Register CSRF prevention interceptor to check CSRF token
 			registry.addInterceptor(getCSRFProtection()).addPathPatterns("/changePassword");
-		}
+		
 	}
 }
