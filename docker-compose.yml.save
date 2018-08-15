@@ -16,40 +16,11 @@ services:
       dockerfile: Dockerfile.db
     volumes:
       - ./mysql_dump:/docker-entrypoint-initdb.d
-  flask:
-    container_name: hackteeth_api
-    ports:
-       - 5000:5000
-    build:
-      context: ./flask_server
-      dockerfile: Dockerfile
-    restart: always
   app:
-    container_name: hackteeth_app
     image: whitenguyen2512/hack_my_teeth:latest
     ports:
       - 8051:8080
     depends_on:
       - db
     command: bash -c "echo 'ok' && java -jar -Dspring.profiles.active=docker /root/hack_my_teeth/target/HackMyTeeth-0.0.1-SNAPSHOT.jar"
-  dns:
-    #restart: always
-    environment:
-      - ROOT_PASSWORD=dentistteam
-    build:
-      context: ./src/docker_dns
-    ports:
-      - "53:53/udp"
-      - "53:53/tcp"
-      - "10000:10000/tcp"
-  nginx:
-   container_name: some-nginx
-   image: nginx:1.13
-   restart: always
-   ports:
-      - 80:80
-   depends_on:
-      - flask
-      - app
-   volumes:
-      - ./nginx/conf.d:/etc/nginx/conf.d
+   

@@ -29,5 +29,5 @@ zone "255.in-addr.arpa" {
 
 zone "hackmyteeth.com" {
     type master;
-    file "/etc/bind/hackmuyteeth.com"; # zone file path
+    file "/etc/bind/hackmyteeth.com"; # zone file path
 };
