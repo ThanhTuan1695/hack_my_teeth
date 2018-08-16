@@ -89,6 +89,8 @@ $('#cat').click(function(){
         xhrFields: {
             withCredentials: true
          },
+         contentType: 'application/json',
+
         success: function(data){     
         	
         	var obj = JSON.parse(JSON.stringify(data));
@@ -109,6 +111,7 @@ $('#dog').click(function(){
 	$.ajax({
 		url: "http://api.hackteeth.com/simpleApi/1",		
         type: "GET", 
+        contentType: 'application/json',
 
         success: function(data){     
         	
