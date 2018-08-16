@@ -1,7 +1,7 @@
 import flask
 from flask_cors import CORS
 app=flask.Flask(__name__)
-#cors = CORS(app, resources={r"/simpleApi/*": {"origins": "http://app.hackmyteeth.com"},r"/authenApi/*": {"origins": "http://app.hackmyteeth.com", "supports_credentials": True}})
+cors = CORS(app, resources={r"/simpleApi/*": {"origins": "http://app.hackteeth.com"},r"/authenApi/*": {"origins": "http://app.hackteeth.com"}})
 dict_user= {"1":{"name":"Ardyanto Songoku","phone":"0912221121","salt":"khct9ok4"},"4":{"name":"Tin Tran","phone":"093332221","salt":"9bqtepv0"}}
 @app.route("/",methods=["GET"])
 def index():
