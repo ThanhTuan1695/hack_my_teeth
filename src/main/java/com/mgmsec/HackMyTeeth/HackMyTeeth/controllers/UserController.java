@@ -10,8 +10,10 @@ import javax.servlet.http.Cookie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.ui.Model;
 
@@ -36,6 +38,9 @@ public class UserController {
 	    SecuritySettings secSettings;
 	    @Autowired
 	    PasswordService pwdService;
+	    
+	    
+	   
 		@RequestMapping(value="/password",method = RequestMethod.GET)
 		public ModelAndView changePage(Model model, HttpServletRequest request) {
 			ModelAndView modelAndView = new ModelAndView();
@@ -56,6 +61,7 @@ public class UserController {
 			modelAndView.setViewName("password");
 			return modelAndView;
 		}
+		
 		@RequestMapping(value="/changePassword",method = RequestMethod.POST)
 		public ModelAndView changeRequest(Model model, HttpServletRequest request) {
 			ModelAndView modelAndView = new ModelAndView();
@@ -94,5 +100,7 @@ public class UserController {
 			modelAndView.setViewName("redirect:/password");
 			return modelAndView;
 		}
+		
+		
 	    
 }

@@ -23,9 +23,9 @@ public class CSRF implements HandlerInterceptor{
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		if (securitySetting.getCsrfProtection().equals(SecurityEnum.CsrfProtection.Token)) {
-			if ("GET".equals(request.getMethod())) {
+			if ("GET".equals(request.getMethod())) { 
 				HttpSession httpSession = request.getSession();
-				System.out.println("adsafad:" +httpSession);
+
 				String _csrf = (String) httpSession.getAttribute("_csrf");
 		
 				// Create csrf token
@@ -35,7 +35,7 @@ public class CSRF implements HandlerInterceptor{
 					httpSession.setAttribute("_csrf", _csrf);
 	
 				}
-				System.out.println("add csrf token");
+				System.out.println(_csrf);
 				request.setAttribute("_csrfToken", _csrf);
 	
 			}

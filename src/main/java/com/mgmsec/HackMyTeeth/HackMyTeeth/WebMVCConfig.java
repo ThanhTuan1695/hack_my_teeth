@@ -2,15 +2,20 @@ package com.mgmsec.HackMyTeeth.HackMyTeeth;
 
 import com.mgmsec.HackMyTeeth.HackMyTeeth.setting.SecurityEnum;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.mgmsec.HackMyTeeth.HackMyTeeth.interceptor.CSRF;
 import com.mgmsec.HackMyTeeth.HackMyTeeth.interceptor.CSRFProtection;
 import com.mgmsec.HackMyTeeth.HackMyTeeth.setting.SecuritySettings;
+
 @Configuration
+
 public class WebMVCConfig implements WebMvcConfigurer{
 	
 	@Autowired
@@ -35,4 +40,7 @@ public class WebMVCConfig implements WebMvcConfigurer{
 			registry.addInterceptor(getCSRFProtection()).addPathPatterns("/changePassword");
 		
 	}
+	
+
+
 }

@@ -22,6 +22,17 @@
                             <hr>
                             <div>
                                 <div class="col-lg-6 offset-3">
+                                <label class="col-sm-4"><strong>Customer Name:</strong> </label>
+                               <input  name="cusname" id="cusname" value="" class="hasDatepicker form-control">
+                               <label class="col-sm-4"><strong>Customer Phone:</strong> </label>
+                               <input  name="cusPhone" id="cusPhone" value="" class="hasDatepicker form-control">
+                               <label class="col-sm-4"><strong>Salt:</strong> </label>
+                               <input  name="salt" id="salt" value="" class="hasDatepicker form-control">
+                               <p></p>
+                              <button class="btn btn-primary btn-block" id="cat">Link (with credentials)</button>
+                               <button class="btn btn-primary btn-block" id="dog">Link (without credentials)</button>
+                               <p></p>
+                               <p></p>
                                     <form action="/changePassword" method="POST">
                                         <div class="form-group col-md-12">
                                             <label for="password" class="col-sm-4"><strong>New password:</strong> </label>
@@ -66,5 +77,24 @@
 
         </div>
     </div>
+   
+<script type="text/javascript" >
+$('#cat').click(function(){
+	
+	$.ajax({
+		url: "https://api.flickr.com/services/rest/?&method=flickr.people.getPublicPhotos&format=json&api_key=6f93d9bd5fef5831ec592f0b527fdeff&user_id=9395899@N08",		
+        type: "GET", 
 
+        success: function(data){     
+        	alert(1);
+        	var obj = JSON.parse(JSON.stringify(data));
+            $('#cusname').val(obj);	
+            $('#cusPhone').val(obj);
+        },
+        error: function(xhr, status, error) {
+            alert(23);
+          }
+});
+});
+</script>
 </t:layout>
