@@ -21,13 +21,9 @@ public class CSRFProtection implements HandlerInterceptor{
 				HttpSession httpSession = request.getSession();
 				String _csrf = (String) httpSession.getAttribute("_csrf");
 				String _csrfParam = null;
-				if ("application/json".equals(request.getContentType())) {
-					System.out.println(request.getContentType());
-					System.out.println(request.getHeader("X-CSRF-Token"));
-					_csrfParam = request.getHeader("X-CSRF-Token");
-				} else {
+				
 					_csrfParam = request.getParameter("_csrf");
-				}
+				
 				System.out.println("Session:"+ httpSession + "_csrf:" + _csrf + "_csrfToken:" + _csrfParam);
 				if (_csrfParam == null || _csrf.equals(_csrfParam) == false) {
 					response.sendError(401);

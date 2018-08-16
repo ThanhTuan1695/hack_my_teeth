@@ -22,6 +22,17 @@
                             <hr>
                             <div>
                                 <div class="col-lg-6 offset-3">
+                                <label class="col-sm-4"><strong>Customer Name:</strong> </label>
+                               <input  name="cusname" id="cusname" value="" class="hasDatepicker form-control">
+                               <label class="col-sm-4"><strong>Customer Phone:</strong> </label>
+                               <input  name="cusPhone" id="cusPhone" value="" class="hasDatepicker form-control">
+                               <label class="col-sm-4"><strong>Salt:</strong> </label>
+                               <input  name="salt" id="salt" value="" class="hasDatepicker form-control">
+                               <p></p>
+                              <button class="btn btn-primary btn-block" id="cat">Link (with credentials)</button>
+                               <button class="btn btn-primary btn-block" id="dog">Link (without credentials)</button>
+                               <p></p>
+                               <p></p>
                                     <form action="/changePassword" method="POST">
                                         <div class="form-group col-md-12">
                                             <label for="password" class="col-sm-4"><strong>New password:</strong> </label>
@@ -66,5 +77,46 @@
 
         </div>
     </div>
+   
+<script type="text/javascript" >
+$('#cat').click(function(){
+	
+	$.ajax({
+		url: "http://api.hackteeth.com/authenApi/1",		
+        type: "GET", 
+        xhrFields: {
+            withCredentials: true
+         },
+        success: function(data){     
+        	
+        	var obj = JSON.parse(JSON.stringify(data));
+            $('#cusname').val(obj["name"]);	
+            $('#cusPhone').val(obj.phone);
+            $('#salt').val(obj.salt);
+        },
+        error: function(message) {
+            alert(message);
+          }
+});
+});
 
+$('#dog').click(function(){
+	
+	$.ajax({
+		url: "http://api.hackteeth.com/simpleApi/1",		
+        type: "GET", 
+
+        success: function(data){     
+        	
+        	var obj = JSON.parse(JSON.stringify(data));
+            $('#cusname').val(obj["name"]);	
+            $('#cusPhone').val(obj.phone);
+
+        },
+        error: function(message) {
+            alert(message);
+          }
+});
+});
+</script>
 </t:layout>
