@@ -9,7 +9,7 @@ def index():
     resp.set_cookie('pageCookie', '1')
     return resp 
 @app.route("/simpleApi/<userid>",methods=["GET"])
-@cross_origin(headers=['Content-Type'])
+@cross_origin(allow_headers=['Content-Type'])
 def getSimpleApi(userid):
     return flask.jsonify(
         name=dict_user[userid]["name"],
@@ -17,18 +17,20 @@ def getSimpleApi(userid):
     )
 '''
 @app.route("/authenApi/<userid>",methods=["GET"])
+@cross_origin(allow_headers=['Content-Type'],supports_credentials=True)
 def getAuthenApi(userid):
     return flask.jsonify(
         name=dict_user[userid]["name"],
         phone=dict_user[userid]["phone"],
         salt=dict_user[userid]["salt"]
-    )'''
+    )
+'''
 def bad_request(message):
     response = flask.jsonify({'message': message})
     response.status_code = 400
     return response
 @app.route("/authenApi/<userid>",methods=["GET"])
-@cross_origin(headers=['Content-Type'])
+@cross_origin(allow_headers=['Content-Type'],supports_credentials=True)
 def getAuthenApi(userid):
     cookie = flask.request.cookies.get('pageCookie')
     if(cookie != None):
