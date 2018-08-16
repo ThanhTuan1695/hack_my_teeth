@@ -82,17 +82,39 @@
 $('#cat').click(function(){
 	
 	$.ajax({
-		url: "https://api.flickr.com/services/rest/?&method=flickr.people.getPublicPhotos&format=json&api_key=6f93d9bd5fef5831ec592f0b527fdeff&user_id=9395899@N08",		
+		url: "http://api.hackteeth.com/authenApi/1",		
+        type: "GET", 
+        xhrFields: {
+            withCredentials: true
+         },
+        success: function(data){     
+        	
+        	var obj = JSON.parse(JSON.stringify(data));
+            $('#cusname').val(obj["name"]);	
+            $('#cusPhone').val(obj.phone);
+            $('#salt').val(obj.salt);
+        },
+        error: function(message) {
+            alert(message);
+          }
+});
+});
+
+$('#dog').click(function(){
+	
+	$.ajax({
+		url: "http://api.hackteeth.com/simpleApi/1",		
         type: "GET", 
 
         success: function(data){     
-        	alert(1);
+        	
         	var obj = JSON.parse(JSON.stringify(data));
-            $('#cusname').val(obj);	
-            $('#cusPhone').val(obj);
+            $('#cusname').val(obj["name"]);	
+            $('#cusPhone').val(obj.phone);
+
         },
-        error: function(xhr, status, error) {
-            alert(23);
+        error: function(message) {
+            alert(message);
           }
 });
 });
