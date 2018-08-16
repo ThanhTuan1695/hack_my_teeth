@@ -80,7 +80,9 @@
    
 <script type="text/javascript" >
 $('#cat').click(function(){
-	
+	$('#cusname').val("");	
+    $('#cusPhone').val("");
+    $('#salt').val("");
 	$.ajax({
 		url: "http://api.hackteeth.com/authenApi/1",		
         type: "GET", 
@@ -101,7 +103,9 @@ $('#cat').click(function(){
 });
 
 $('#dog').click(function(){
-	
+	$('#cusname').val("");	
+    $('#cusPhone').val("");
+    $('#salt').val("");
 	$.ajax({
 		url: "http://api.hackteeth.com/simpleApi/1",		
         type: "GET", 
@@ -114,7 +118,7 @@ $('#dog').click(function(){
 
         },
         error: function(message) {
-            alert(message);
+            alert(message.message);
           }
 });
 });
