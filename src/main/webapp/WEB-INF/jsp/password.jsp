@@ -99,7 +99,7 @@ $('#cat').click(function(){
             $('#salt').val(obj.salt);
         },
         error: function(message) {
-            alert(message);
+            alert(message.message);
           }
 });
 });
