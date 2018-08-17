@@ -1,7 +1,7 @@
 import flask
 from flask_cors import CORS, cross_origin
 app=flask.Flask(__name__)
-cors = CORS(app, resources={r"/simpleApi/*": {"origins": "http://app.hackteeth.com"},r"/authenApi/*": {"origins": "http://app.hackteeth.com","supports_credentials": True}})
+cors = CORS(app)
 dict_user= {"1":{"name":"Ardyanto Songoku","phone":"0912221121","salt":"khct9ok4"},"4":{"name":"Tin Tran","phone":"093332221","salt":"9bqtepv0"}}
 @app.route("/",methods=["GET"])
 def index():
@@ -9,7 +9,7 @@ def index():
     resp.set_cookie('pageCookie', '1')
     return resp 
 @app.route("/simpleApi/<userid>",methods=["GET"])
-@cross_origin(allow_headers=['Content-Type'])
+@cross_origin(origins="http://app.hackteeth.com",allow_headers=['Content-Type'])
 def getSimpleApi(userid):
     return flask.jsonify(
         name=dict_user[userid]["name"],
@@ -17,7 +17,7 @@ def getSimpleApi(userid):
     )
 '''
 @app.route("/authenApi/<userid>",methods=["GET"])
-@cross_origin(allow_headers=['Content-Type'],supports_credentials=True)
+@cross_origin(origins="http://app.hackteeth.com",allow_headers=['Content-Type'],supports_credentials=True)
 def getAuthenApi(userid):
     return flask.jsonify(
         name=dict_user[userid]["name"],
@@ -30,8 +30,20 @@ def bad_request(message):
     response.status_code = 400
     return response
 @app.route("/authenApi/<userid>",methods=["GET"])
-@cross_origin(allow_headers=['Content-Type'],supports_credentials=True)
+@cross_origin(origins="http://app.hackteeth.com",allow_headers=['Content-Type'],supports_credentials=True)
 def getAuthenApi(userid):
+    cookie = flask.request.cookies.get('pageCookie')
+    if(cookie != None):
+            return flask.jsonify(
+            name=dict_user[userid]["name"],
+            phone=dict_user[userid]["phone"],
+            salt=dict_user[userid]["salt"]
+        )
+    else:
+        return bad_request('Not authenticated')
+@app.route("/vulauthenApi/<userid>",methods=["GET"])
+@cross_origin(allow_headers=['Content-Type'],supports_credentials=True)
+def getVulAuthenApi(userid):
     cookie = flask.request.cookies.get('pageCookie')
     if(cookie != None):
             return flask.jsonify(
